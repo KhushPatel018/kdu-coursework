@@ -43,9 +43,7 @@ public class StudentUtil {
      */
     public static int[] getStudentsByGPA(double lower, double higher, int[]
             studentIdList, char[][] studentsGrades) {
-        if(lower > higher || lower < 0 || higher < 0) {
-            return null;
-        };
+        if(lower > higher || lower < 0 || higher < 0) {return null};
         double[] gpaList = calculateGPA(studentIdList,studentsGrades);
         int noOfStudents = studentIdList.length;
 
