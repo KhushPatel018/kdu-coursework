@@ -25,7 +25,7 @@ enum UpdateOptions{
 
 public class Main {
 
-    public static int TakeIdInput(Scanner sc)
+    public static int takeIdInput(Scanner sc)
     {
         int id;
         System.out.print("Enter the id : ");
@@ -34,7 +34,7 @@ public class Main {
         return id;
     }
 
-    public static int TakeAgeInput(Scanner sc)
+    public static int takeAgeInput(Scanner sc)
     {
         int age;
         System.out.print("Enter the age : ");
@@ -82,9 +82,9 @@ public class Main {
             switch (option) {
                 case ADD -> {
                     System.out.println("You want to add student to Student Repository so please provide the student details \n");
-                    id = TakeIdInput(sc);
+                    id = takeIdInput(sc);
                     name = takeNameInput(sc);
-                    age = TakeAgeInput(sc);
+                    age = takeAgeInput(sc);
                     sc.nextLine();
                     grade = takeGradeInput(sc);
                     Register.add(new Student(id, name, age, grade));
@@ -96,7 +96,7 @@ public class Main {
 
                     switch (Type) {
                         case RETRIEVAL_BY_ID -> {
-                            id = TakeIdInput(sc);
+                            id = takeIdInput(sc);
                             Student retrieved_student = Register.retrieve(id);
                             retrieved_student.printStudent();
                         }
@@ -108,7 +108,7 @@ public class Main {
                             }
                         }
                         case RETRIEVAL_BY_ID_AND_NAME -> {
-                            id = TakeIdInput(sc);
+                            id = takeIdInput(sc);
                             name = takeNameInput(sc);
                             Student retrieved_student = Register.retrieve(id, name);
                             retrieved_student.printStudent();
@@ -122,21 +122,21 @@ public class Main {
 
                     switch (Type) {
                         case UPDATE_ALL -> {
-                            id = TakeIdInput(sc);
+                            id = takeIdInput(sc);
                             name = takeNameInput(sc);
-                            age = TakeAgeInput(sc);
+                            age = takeAgeInput(sc);
                             grade = takeGradeInput(sc);
                             Student updated_student = Register.update(id, name, age, grade);
                             updated_student.printStudent();
                         }
                         case UPDATE_AGE -> {
-                            id = TakeIdInput(sc);
-                            age = TakeAgeInput(sc);
+                            id = takeIdInput(sc);
+                            age = takeAgeInput(sc);
                             Student updated_student = Register.update(id, age);
                             updated_student.printStudent();
                         }
                         case UPDATE_NAME -> {
-                            id = TakeIdInput(sc);
+                            id = takeIdInput(sc);
                             name = takeNameInput(sc);
                             Student updated_student = Register.update(id, name);
                             updated_student.printStudent();
