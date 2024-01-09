@@ -12,7 +12,6 @@ public class StudentUtil {
      */
     public static double[] calculateGPA(int[] studentIdList, char[][]
             studentsGrades) {
-// your code
         int noOfStudents = studentIdList.length;
         double[] gpaList = new double[noOfStudents];
         HashMap<String,Integer> gradesToPoints = new HashMap<>();
@@ -23,7 +22,6 @@ public class StudentUtil {
 
         for(int i = 0;i < noOfStudents;i++)
         {
-            double gpa;
             int points = 0;
             int totalCourses = studentsGrades[i].length;
             for(int j = 0;j < totalCourses;j++)
@@ -45,10 +43,12 @@ public class StudentUtil {
      */
     public static int[] getStudentsByGPA(double lower, double higher, int[]
             studentIdList, char[][] studentsGrades) {
-        if(lower > higher || lower < 0 || higher < 0) return null;
+        if(lower > higher || lower < 0 || higher < 0) {
+            return new int[];
+        };
         double[] gpaList = calculateGPA(studentIdList,studentsGrades);
         int noOfStudents = studentIdList.length;
-//        int[] validStudents = new int[noOfStudents];
+
         ArrayList<Integer> validStudents = new ArrayList<Integer>();
         for(int i = 0;i < noOfStudents;i++)
         {
