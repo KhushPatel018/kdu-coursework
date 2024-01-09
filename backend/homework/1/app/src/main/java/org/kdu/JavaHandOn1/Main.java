@@ -24,6 +24,40 @@ enum UpdateOptions{
 }
 
 public class Main {
+
+    public static int TakeIdInput(Scanner sc)
+    {
+        int id;
+        System.out.print("Enter the id : ");
+        id = sc.nextInt();
+        sc.nextLine();
+        return id;
+    }
+
+    public static int TakeAgeInput(Scanner sc)
+    {
+        int age;
+        System.out.print("Enter the age : ");
+        age = sc.nextInt();
+        return age;
+    }
+
+    public static String takeNameInput(Scanner sc)
+    {
+        String name;
+        System.out.print("Enter the name : ");
+        name = sc.nextLine();
+        return name;
+    }
+
+    public static String takeGradeInput(Scanner sc)
+    {
+        String grade;
+        System.out.print("Enter the Grade : ");
+        grade = sc.nextLine();
+        return grade;
+    }
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -32,8 +66,10 @@ public class Main {
         // initializing Student Repository
         StudentRepository Register = new StudentRepository();
 
-        int age,id;
-        String grade,name;
+        int age;
+        int id;
+        String grade;
+        String name;
 
 
         boolean gate = true;
@@ -46,16 +82,11 @@ public class Main {
             switch (option) {
                 case ADD -> {
                     System.out.println("You want to add student to Student Repository so please provide the student details \n");
-                    System.out.print("Enter the id : ");
-                    id = sc.nextInt();
+                    id = TakeIdInput(sc);
+                    name = takeNameInput(sc);
+                    age = TakeAgeInput(sc);
                     sc.nextLine();
-                    System.out.print("Enter the name : ");
-                    name = sc.nextLine();
-                    System.out.print("Enter the age : ");
-                    age = sc.nextInt();
-                    sc.nextLine();
-                    System.out.print("Enter the Grade : ");
-                    grade = sc.nextLine();
+                    grade = takeGradeInput(sc);
                     Register.add(new Student(id, name, age, grade));
                 }
                 case RETRIEVE -> {
@@ -65,26 +96,20 @@ public class Main {
 
                     switch (Type) {
                         case RETRIEVAL_BY_ID -> {
-                            System.out.print("Enter the id : ");
-                            id = sc.nextInt();
-                            sc.nextLine();
+                            id = TakeIdInput(sc);
                             Student retrieved_student = Register.retrieve(id);
                             retrieved_student.printStudent();
                         }
                         case RETRIEVAL_BY_NAME -> {
-                            System.out.print("Enter the name : ");
-                            name = sc.nextLine();
+                            name = takeNameInput(sc);
                             ArrayList<Student> students = Register.retrieve(name);
                             for (Student retrieved_student : students) {
                                 retrieved_student.printStudent();
                             }
                         }
                         case RETRIEVAL_BY_ID_AND_NAME -> {
-                            System.out.print("Enter the id : ");
-                            id = sc.nextInt();
-                            sc.nextLine();
-                            System.out.print("Enter the name : ");
-                            name = sc.nextLine();
+                            id = TakeIdInput(sc);
+                            name = takeNameInput(sc);
                             Student retrieved_student = Register.retrieve(id, name);
                             retrieved_student.printStudent();
                         }
@@ -97,34 +122,22 @@ public class Main {
 
                     switch (Type) {
                         case UPDATE_ALL -> {
-                            System.out.print("Enter the id : ");
-                            id = sc.nextInt();
-                            sc.nextLine();
-                            System.out.print("Enter the name : ");
-                            name = sc.nextLine();
-                            System.out.print("Enter the age : ");
-                            age = sc.nextInt();
-                            sc.nextLine();
-                            System.out.print("Enter the Grade : ");
-                            grade = sc.nextLine();
+                            id = TakeIdInput(sc);
+                            name = takeNameInput(sc);
+                            age = TakeAgeInput(sc);
+                            grade = takeGradeInput(sc);
                             Student updated_student = Register.update(id, name, age, grade);
                             updated_student.printStudent();
                         }
                         case UPDATE_AGE -> {
-                            System.out.print("Enter the id : ");
-                            id = sc.nextInt();
-                            System.out.print("Enter the age : ");
-                            age = sc.nextInt();
-                            sc.nextLine();
+                            id = TakeIdInput(sc);
+                            age = TakeAgeInput(sc);
                             Student updated_student = Register.update(id, age);
                             updated_student.printStudent();
                         }
                         case UPDATE_NAME -> {
-                            System.out.print("Enter the id : ");
-                            id = sc.nextInt();
-                            sc.nextLine();
-                            System.out.print("Enter the name : ");
-                            name = sc.nextLine();
+                            id = TakeIdInput(sc);
+                            name = takeNameInput(sc);
                             Student updated_student = Register.update(id, name);
                             updated_student.printStudent();
                         }
