@@ -1,4 +1,4 @@
-package kdu.homework3.hospitalMangement;
+package kdu.homework3.hospital;
 
 //Doctor: doctorId (long), specialization (String)
 public class Doctor extends Staff {

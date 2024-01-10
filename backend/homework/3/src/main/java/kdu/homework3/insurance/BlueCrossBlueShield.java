@@ -1,6 +1,6 @@
-package kdu.homework3.insuranceMangement;
+package kdu.homework3.insurance;
 
-import kdu.homework3.Logging.LoggingSystem;
+import kdu.homework3.logging.LoggingSystem;
 
 
 public class BlueCrossBlueShield implements InsuranceBrand {

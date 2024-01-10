@@ -1,4 +1,4 @@
-package kdu.homework3.hospitalMangement;
+package kdu.homework3.hospital;
 
 
 public class Nurse extends Staff{

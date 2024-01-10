@@ -1,7 +1,7 @@
-package kdu.homework3.insuranceMangement;
+package kdu.homework3.insurance;
 
-import kdu.homework3.Logging.LoggingSystem;
-import kdu.homework3.hospitalMangement.Patient;
+import kdu.homework3.logging.LoggingSystem;
+import kdu.homework3.hospital.Patient;
 
 
 public class Billing {

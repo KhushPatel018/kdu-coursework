@@ -1,6 +1,6 @@
-package kdu.homework3.hospitalMangement;
+package kdu.homework3.hospital;
 
-import kdu.homework3.insuranceMangement.HealthInsurancePlan;
+import kdu.homework3.insurance.HealthInsurancePlan;
 
 public class User {
     private long id;

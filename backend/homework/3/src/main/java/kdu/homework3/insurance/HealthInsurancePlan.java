@@ -1,4 +1,4 @@
-package kdu.homework3.insuranceMangement;
+package kdu.homework3.insurance;
 
 public abstract class HealthInsurancePlan {
     double coverage;
