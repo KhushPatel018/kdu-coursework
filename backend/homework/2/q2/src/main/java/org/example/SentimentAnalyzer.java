@@ -221,7 +221,7 @@ public class SentimentAnalyzer {
                 "Opinions on Features: " + Arrays.toString(featureOpinionsForReview1)
         );
         ls.logInfo(
-                "Opinions on Features: " + Arrays.toString(featureOpinionsForReview2a)
+                "Opinions on Features: " + Arrays.toString(featureOpinionsForReview2)
         );
     }
 }
