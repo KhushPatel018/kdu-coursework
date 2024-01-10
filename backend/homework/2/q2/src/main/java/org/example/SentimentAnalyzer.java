@@ -56,13 +56,13 @@ public class SentimentAnalyzer {
             String[] posOpinionWords,
             String[] negOpinionWords
     ) {
-        int Opinion = checkForWasPhrasePattern(review,feature,posOpinionWords,negOpinionWords);
-        if(Opinion != 0)
+        int opinion = checkForWasPhrasePattern(review,feature,posOpinionWords,negOpinionWords);
+        if(opinion != 0)
         {
-            return Opinion;
+            return opinion;
         }
-        Opinion = checkForOpinionFirstPattern(review,feature,posOpinionWords,negOpinionWords);
-        return Opinion;
+        opinion = checkForOpinionFirstPattern(review,feature,posOpinionWords,negOpinionWords);
+        return opinion;
     }
 
 
@@ -79,12 +79,9 @@ public class SentimentAnalyzer {
     private static boolean findOpinionForPhrasePattern(String[] reviewWords, String feature,HashSet<String> OpinionWordsSet) {
         for(int i  = 0;i < reviewWords.length;i++)
         {
-            if(reviewWords[i].equalsIgnoreCase(feature) && reviewWords.length > i+2 && reviewWords[i+1].equalsIgnoreCase("was"))
+            if(reviewWords[i].equalsIgnoreCase(feature) && reviewWords.length > i+2 && reviewWords[i+1].equalsIgnoreCase("was") && OpinionWordsSet.contains(reviewWords[i+2]))
             {
-                if(OpinionWordsSet.contains(reviewWords[i+2]))
-                {
                     return true;
-                }
             }
         }
         return false;
@@ -108,7 +105,6 @@ public class SentimentAnalyzer {
             String[] negOpinionWords
     ) {
         int opinion = 0;
-//        String pattern = feature + " was ";
         HashSet<String> posOpinionWordsSet = new HashSet<>();
         HashSet<String> negOpinionWordsSet = new HashSet<>();
         addOpinionsToSet(posOpinionWordsSet,posOpinionWords);
@@ -130,11 +126,9 @@ public class SentimentAnalyzer {
     private static boolean findOpinionFirstPattern(String[] sentenceWords,String feature,HashSet<String> OpinionWordsSet){
         for(int i = 0;i < sentenceWords.length;i++)
         {
-            if(sentenceWords[i].equalsIgnoreCase(feature) && i > 0)
+            if(sentenceWords[i].equalsIgnoreCase(feature) && i > 0 && OpinionWordsSet.contains(sentenceWords[i-1].toLowerCase()))
             {
-                if(OpinionWordsSet.contains(sentenceWords[i-1].toLowerCase())){
                     return true;
-                }
             }
         }
         return false;
@@ -175,8 +169,8 @@ public class SentimentAnalyzer {
     }
 
     public static void main(String[] args) {
-//        String review = "Haven't been here in years! Fantastic service and the food was delicious! Definetly will be a frequent flyer! Francisco was very attentive";
-        String review = "Sorry OG, but you just lost some loyal customers. Horrible service, no smile or greeting just attitude. The breadsticks were stale and burnt, appetizer was cold and the food came out before the salad.";
+        String review1 = "Haven't been here in years! Fantastic service and the food was delicious! Definetly will be a frequent flyer! Francisco was very attentive";
+        String review2 = "Sorry OG, but you just lost some loyal customers. Horrible service, no smile or greeting just attitude. The breadsticks were stale and burnt, appetizer was cold and the food came out before the salad.";
         String[][] featureSet = {
                 { "ambiance", "ambience", "atmosphere", "decor" },
                 { "dessert", "ice cream", "desert" },
@@ -210,15 +204,24 @@ public class SentimentAnalyzer {
                 "unprofessional",
                 "poor",
         };
-        int[] featureOpinions = detectProsAndCons(
-                review,
+        int[] featureOpinionsForReview1 = detectProsAndCons(
+                review1,
+                featureSet,
+                posOpinionWords,
+                negOpinionWords
+        );
+        int[] featureOpinionsForReview2 = detectProsAndCons(
+                review1,
                 featureSet,
                 posOpinionWords,
                 negOpinionWords
         );
 
         ls.logInfo(
-                "Opinions on Features: " + Arrays.toString(featureOpinions)
+                "Opinions on Features: " + Arrays.toString(featureOpinionsForReview1)
+        );
+        ls.logInfo(
+                "Opinions on Features: " + Arrays.toString(featureOpinionsForReview2a)
         );
     }
 }

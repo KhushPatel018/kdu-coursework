@@ -3,7 +3,7 @@ package org.example;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class StudentUtil {
+class StudentUtil {
     /**
      * calculate gpa by averaging the points in courses
      * @param studentIdList student ids
@@ -46,7 +46,7 @@ public class StudentUtil {
         double[] gpaList = calculateGPA(studentIdList,studentsGrades);
         int noOfStudents = studentIdList.length;
 
-        ArrayList<Integer> validStudents = new ArrayList<Integer>();
+        ArrayList<Integer> validStudents = new ArrayList<>();
         for(int i = 0;i < noOfStudents;i++)
         {
             double gpa = gpaList[i];
@@ -59,7 +59,7 @@ public class StudentUtil {
         int[] studentsInRange = new int[validStudents.size()];
         for(int i = 0;i < validStudents.size();i++)
         {
-            studentsInRange[i] = (int)validStudents.get(i);
+            studentsInRange[i] = validStudents.get(i);
         }
         return studentsInRange;
     }
