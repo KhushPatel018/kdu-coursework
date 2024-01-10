@@ -1,4 +1,4 @@
-package kdu.homework3.InsuranceMangement;
+package kdu.homework3.insuranceMangement;
 
 import kdu.homework3.Logging.LoggingSystem;
 
@@ -13,17 +13,17 @@ public class BlueCrossBlueShield implements InsuranceBrand {
         try{
 
             if(insurancePlan instanceof PlatinumPlan){
-                if(age > 55) premium+= 200;
-                if(smoking) premium+=100;
+                premium+= age > 55 ? 200 : 0;
+                premium+= smoking ? 100 : 0;
             }else if(insurancePlan instanceof GoldPlan){
-                if(age > 55) premium+= 150;
-                if(smoking) premium+=90;
+                premium+= age > 55 ? 150 : 0;
+                premium+= smoking ? 90 : 0;
             } else if (insurancePlan instanceof SilverPlan) {
-                if(age > 55) premium+= 100;
-                if(smoking) premium+=80;
+                premium+= age > 55 ? 100 : 0;
+                premium+= smoking ? 80 : 0;
             } else if (insurancePlan instanceof BronzePlan) {
-                if(age > 55) premium+= 50;
-                if(smoking) premium+=70;
+                premium+= age > 55 ? 50 : 0;
+                premium+= smoking ? 70 : 0;
             }else {
                 throw new NullPointerException("not taken any insurance plan");
             }

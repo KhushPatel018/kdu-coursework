@@ -1,9 +1,9 @@
 package kdu.homework3.q2;
 
-import kdu.homework3.HospitalMangement.Patient;
-import kdu.homework3.InsuranceMangement.Billing;
-import kdu.homework3.InsuranceMangement.HealthInsurancePlan;
-import kdu.homework3.InsuranceMangement.PlatinumPlan;
+import kdu.homework3.hospitalMangement.Patient;
+import kdu.homework3.insuranceMangement.Billing;
+import kdu.homework3.insuranceMangement.HealthInsurancePlan;
+import kdu.homework3.insuranceMangement.PlatinumPlan;
 import kdu.homework3.Logging.LoggingSystem;
 
 public class Main {

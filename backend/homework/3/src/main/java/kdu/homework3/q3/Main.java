@@ -2,9 +2,9 @@ package kdu.homework3.q3;
 
 
 import kdu.homework3.Logging.LoggingSystem;
-import kdu.homework3.HospitalMangement.Doctor;
-import kdu.homework3.InsuranceMangement.HealthInsurancePlan;
-import kdu.homework3.InsuranceMangement.PlatinumPlan;
+import kdu.homework3.hospitalMangement.Doctor;
+import kdu.homework3.insuranceMangement.HealthInsurancePlan;
+import kdu.homework3.insuranceMangement.PlatinumPlan;
 
 public class Main {
     private static final LoggingSystem ls = new LoggingSystem();

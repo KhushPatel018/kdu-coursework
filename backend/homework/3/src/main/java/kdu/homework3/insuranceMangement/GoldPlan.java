@@ -1,4 +1,4 @@
-package kdu.homework3.InsuranceMangement;
+package kdu.homework3.insuranceMangement;
 
 public class GoldPlan extends HealthInsurancePlan {
 

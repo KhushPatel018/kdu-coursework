@@ -1,10 +1,14 @@
-package kdu.homework3.InsuranceMangement;
+package kdu.homework3.insuranceMangement;
 
 import kdu.homework3.Logging.LoggingSystem;
-import kdu.homework3.HospitalMangement.Patient;
+import kdu.homework3.hospitalMangement.Patient;
 
 
 public class Billing {
+
+    private Billing(){
+
+    }
     private static final LoggingSystem ls = new LoggingSystem();
 
     /**
