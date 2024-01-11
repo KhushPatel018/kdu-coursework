@@ -62,6 +62,7 @@ public class TicketReservation {
         Iterator<Passenger> waitListIterator = confirmedList.iterator();
 
         if(removePassenger(confirmedListIterator,confirmationNumber)){
+            confirmedList.add(waitingList.poll());
             return true;
         }else return removePassenger(waitListIterator, confirmationNumber);
     }
