@@ -18,7 +18,8 @@ public class Main {
             factorialThread.join();
             factorsThread.join();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            ls.logWarn("Interupted");
+            Thread.currentThread().interrupt();
         }
 
         // Main thread finishes last
