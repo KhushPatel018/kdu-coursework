@@ -1,0 +1,5 @@
+Question 2
+Develop the same application as question 1 but use the ExecutorFramework to have a MessageSender thread pool and a MessageReceiver thread pool.
+
+Question 3 (Optional)
+Write a program, to run two threads simultaneously. One thread will calculate the factorial of a number and another thread will calculate the factors of that number. Make sure that the main thread finishes last.
