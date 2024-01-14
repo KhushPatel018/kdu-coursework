@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TraderList {
-    private static  HashMap<String, Trader> traders = new HashMap<>();
+    public static  HashMap<String, Trader> traders = new HashMap<>();
     private static TraderList accessTraders = new TraderList();
     public static final LoggingSystem ls = new LoggingSystem();
 

@@ -70,7 +70,8 @@ public class ExecuteTransaction implements Runnable {
             // have enough to buy
             coin.setCirculationSupply(supply - quantity);
             trader.buyCoin(symbol,quantity,price);
-
+            TraderList.traders.put(walletAddress,trader);
+            CoinsList.coins.put(symbol,coin);
             // notifying coin buy was success
             coin.notifyAll();
 
@@ -114,7 +115,8 @@ public class ExecuteTransaction implements Runnable {
             // have enough to sell
             trader.sellCoin(symbol,quantity,price);
             coin.setCirculationSupply(coin.getCirculationSupply() + quantity);
-
+            TraderList.traders.put(walletAddress,trader);
+            CoinsList.coins.put(symbol,coin);
             // notifying trader's sell has been done
             coin.notifyAll();
         }
@@ -132,21 +134,23 @@ public class ExecuteTransaction implements Runnable {
         long volume = data.get("volume").asLong();
         synchronized (coin){
             coin.setCirculationSupply(coin.getCirculationSupply() + volume);
+            CoinsList.coins.put(symbol,coin);
             coin.notifyAll();
         }
     }
 
     private void updatePrice(JsonNode data) {
         String symbol = data.get("coin").asText();
-        Coins coins = ExecuteTransaction.coins.getCoins(symbol);
-        if(coins == null)
+        Coins coin = ExecuteTransaction.coins.getCoins(symbol);
+        if(coin == null)
         {
             ls.logInfo(symbol + " is not a coin");
             return;
         }
         double price = data.get("price").asDouble();
-        synchronized (coins){
-            coins.setPrice(price);
+        synchronized (coin){
+            coin.setPrice(price);
+            CoinsList.coins.put(symbol,coin);
         }
     }
 
