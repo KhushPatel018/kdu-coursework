@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class CoinsList {
-    public static HashMap<String, Coins> coins = new HashMap<>();
+    public static final HashMap<String, Coins> coins = new HashMap<>();
     private static CoinsList accessCoins = new CoinsList();
     public static final LoggingSystem ls = new LoggingSystem();
 

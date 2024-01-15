@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 public class TraderList {
-    public static  HashMap<String, Trader> traders = new HashMap<>();
+    public static final HashMap<String, Trader> traders = new HashMap<>();
     private static TraderList accessTraders = new TraderList();
     public static final LoggingSystem ls = new LoggingSystem();
 

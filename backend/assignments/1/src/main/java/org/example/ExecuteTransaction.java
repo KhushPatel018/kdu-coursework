@@ -10,8 +10,8 @@ public class ExecuteTransaction implements Runnable {
 
     private JsonNode jsonTransaction;
     private CountDownLatch latch;
-    public static TraderList traders = TraderList.getAccessTraders();
-    public static CoinsList coins = CoinsList.getAccessCoins();
+    public static final TraderList traders = TraderList.getAccessTraders();
+    public static final CoinsList coins = CoinsList.getAccessCoins();
     Random rnd;
 
     String notCoin = " is not a coin";
@@ -27,15 +27,15 @@ public class ExecuteTransaction implements Runnable {
     public synchronized void run() {
 
         try {
-            String hash = getBlockHash();
+             getBlockHash();
             JsonNode data = jsonTransaction.get("data");
             if(data == null){
                 ls.logInfo("data null");
             }
             String type =  jsonTransaction.get("type").asText();
             switch (type) {
-                case "BUY" -> processBuyTransaction(data,hash);
-                case "SELL" -> processSellTransaction(data,hash);
+                case "BUY" -> processBuyTransaction(data);
+                case "SELL" -> processSellTransaction(data);
                 case "ADD_VOLUME" -> addVolume(data);
                 case "UPDATE_PRICE" -> updatePrice(data);
                 default -> {
@@ -47,7 +47,7 @@ public class ExecuteTransaction implements Runnable {
         }
     }
 
-    private  void processBuyTransaction(JsonNode data,String hash) {
+    private  void processBuyTransaction(JsonNode data) {
         String symbol = data.get("coin").asText();
         Coins coin = coins.getCoins(symbol);
         long quantity = data.get("quantity").asLong();
@@ -84,7 +84,7 @@ public class ExecuteTransaction implements Runnable {
     }
 
 
-    private  void processSellTransaction(JsonNode data,String hash) {
+    private  void processSellTransaction(JsonNode data) {
         String symbol = data.get("coin").asText();
         Coins coin = coins.getCoins(symbol);
         if(coin == null)
