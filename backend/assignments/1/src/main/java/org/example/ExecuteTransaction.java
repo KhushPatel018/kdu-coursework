@@ -12,6 +12,9 @@ public class ExecuteTransaction implements Runnable {
     private CountDownLatch latch;
     public static TraderList traders = TraderList.getAccessTraders();
     public static CoinsList coins = CoinsList.getAccessCoins();
+    Random rnd;
+
+    String notCoin = " is not a coin";
     public ExecuteTransaction(){
 
     }
@@ -86,7 +89,7 @@ public class ExecuteTransaction implements Runnable {
         Coins coin = coins.getCoins(symbol);
         if(coin == null)
         {
-            ls.logInfo(symbol + " is not a coin");
+            ls.logInfo(symbol + notCoin);
             return;
         }
         long quantity = data.get("quantity").asLong();
@@ -130,7 +133,7 @@ public class ExecuteTransaction implements Runnable {
         Coins coin = coins.getCoins(symbol);
         if(coin == null)
         {
-            ls.logInfo(symbol + " is not a coin");
+            ls.logInfo(symbol + notCoin);
            return;
         }
         long volume = data.get("volume").asLong();
@@ -146,7 +149,7 @@ public class ExecuteTransaction implements Runnable {
         Coins coin = ExecuteTransaction.coins.getCoins(symbol);
         if(coin == null)
         {
-            ls.logInfo(symbol + " is not a coin");
+            ls.logInfo(symbol + notCoin);
             return;
         }
         double price = data.get("price").asDouble();
@@ -157,9 +160,9 @@ public class ExecuteTransaction implements Runnable {
     }
 
     private String getBlockHash() {
-        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        String saltChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder transactionHash = new StringBuilder();
-        Random rnd = new Random();
+         rnd = new Random();
 
         // Introducing delay mimicking complex calculation being performed.
         for (double i = 0; i < 199999999; i++) {
@@ -167,8 +170,8 @@ public class ExecuteTransaction implements Runnable {
         }
 
         while (transactionHash.length() < 128) {
-            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
-            transactionHash.append(SALTCHARS.charAt(index));
+            int index = (int) (rnd.nextFloat() * saltChars.length());
+            transactionHash.append(saltChars.charAt(index));
         }
 
         String hashCode = transactionHash.toString();

@@ -38,10 +38,6 @@ public class Coins {
         this.name = name;
     }
 
-    public  String getSymbol() {
-        return symbol;
-    }
-
     public String getCoinSymbol(){
         return symbol;
     }

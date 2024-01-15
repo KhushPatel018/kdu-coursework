@@ -34,7 +34,7 @@ public class CoinsList {
                 coins1.setRank(Integer.parseInt(coinsDetails[1]));
                 coins1.setSymbol(coinsDetails[3]);
                 coins1.setCirculationSupply(Long.parseLong(coinsDetails[5]));
-                coins.put(coins1.getSymbol(), coins1);
+                coins.put(coins1.getCoinSymbol(), coins1);
             }
             ls.logInfo("coins Loaded.....");
         } catch (IOException | CsvException e) {

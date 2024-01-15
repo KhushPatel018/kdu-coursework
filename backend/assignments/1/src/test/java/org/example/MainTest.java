@@ -61,7 +61,7 @@ public class MainTest {
      * @see Main#parseCSV(Path)
      */
     @Test
-    public void testParseCSV() throws IOException {
+     void testParseCSV() throws IOException {
         // check for coins.csv
         Path coinCsvPath = Path.of("src/test/resources/coins.csv");
         ArrayList<String[]> expectedCoins = new ArrayList<>();
@@ -71,7 +71,7 @@ public class MainTest {
         expectedCoins.add(new String[]{"3", "4", "BNB", "BNB", "351.39", "165116761"});
         expectedCoins.add(new String[]{"4", "5", "USD Coin", "USDC", "1.00", "47861732704"});
         expectedCoins.add(new String[]{"5", "6", "Cardano", "ADA", "1.02", "33550574442"});
-        ArrayList<String[]> actual = Main.parseCSV(coinCsvPath);
+        ArrayList<String[]> actual = (ArrayList<String[]>) Main.parseCSV(coinCsvPath);
 
         Assertions.assertEquals(expectedCoins.size(), actual.size());
         for (int i = 0; i < expectedCoins.size(); i++) {
@@ -89,7 +89,7 @@ public class MainTest {
         expectedTraders.add(new String[]{"3", "Lenna", "Paprocki", "907-385-4412", "0xab190b6af9471e4c8e717418e940423c"});
         expectedTraders.add(new String[]{"4", "Donette", "Foller", "513-570-1893", "0xbe3887c02d3d33e16ba49b3607c50e3a"});
         expectedTraders.add(new String[]{"5", "Simona", "Morasca", "419-503-2484", "0xbd670dbca4260f5f1403b555bbe2dd9e"});
-        ArrayList<String[]> actualTraders = Main.parseCSV(traderCsvPath);
+        ArrayList<String[]> actualTraders = (ArrayList<String[]>) Main.parseCSV(traderCsvPath);
 
         Assertions.assertEquals(expectedTraders.size(), actualTraders.size());
 
@@ -114,7 +114,7 @@ public class MainTest {
      * @see ExecuteTransaction
      */
     @Test
-    public void testConcurrentTransactions() {
+     void testConcurrentTransactions() {
         JsonNode transactionArray;
         int numberOfThreads = 3;
         CountDownLatch latch = new CountDownLatch(numberOfThreads);
@@ -147,7 +147,7 @@ public class MainTest {
      * @see ExecuteTransaction
      */
     @Test
-    public void testConcurrentTransactions1() {
+     void testConcurrentTransactions1() {
         JsonNode transactionArray;
         int numberOfThreads = 3;
         CountDownLatch latch = new CountDownLatch(numberOfThreads);
@@ -180,7 +180,7 @@ public class MainTest {
      * @see ExecuteTransaction
      */
     @Test
-    public void testConcurrentTransactionsMediumFile() {
+     void testConcurrentTransactionsMediumFile() {
         JsonNode transactionArray;
         int numberOfThreads = 12;
         CountDownLatch latch = new CountDownLatch(numberOfThreads);
@@ -212,7 +212,7 @@ public class MainTest {
      * @see ExecuteTransaction
      */
     @Test
-    public void testConcurrentTransactionsLargeFile() {
+     void testConcurrentTransactionsLargeFile() {
         JsonNode transactionArray;
         int numberOfThreads = 20;
         CountDownLatch latch = new CountDownLatch(numberOfThreads);
