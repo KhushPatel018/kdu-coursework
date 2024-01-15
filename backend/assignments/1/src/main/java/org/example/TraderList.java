@@ -1,14 +1,12 @@
+package org.example;
+
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 public class TraderList {
     public static  HashMap<String, Trader> traders = new HashMap<>();
     private static TraderList accessTraders = new TraderList();
@@ -56,33 +54,14 @@ public class TraderList {
         return trader;
     }
 
-    public static void logTrader(String address){
-        Trader trader = traders.get(address);
-        if (trader == null) {
-            ls.logInfo("trader doesn't exist with address" + address);
-        } else {
-            trader.toString();
-        }
-    }
-
-    public static void PrintTopNTraders(int n){
-        List<Trader> traderCollection = traders.values().stream().sorted(new Comparator<Trader>() {
-            @Override
-            public int compare(Trader trader, Trader t1) {
-                return Double.compare(t1.getProfitLoss(),trader.getProfitLoss());
-            }
-        }).limit(n).toList();
+    public static void printTopNTraders(int n){
+        List<Trader> traderCollection = traders.values().stream().sorted((trader, t1) -> Double.compare(t1.getProfitLoss(),trader.getProfitLoss())).limit(n).toList();
 
         traderCollection.forEach(trader -> ls.logInfo(trader.toString()));
     }
 
-    public static void PrintLastNTraders(int n){
-        List<Trader> traderCollection = traders.values().stream().sorted(new Comparator<Trader>() {
-            @Override
-            public int compare(Trader trader, Trader t1) {
-                return Double.compare(trader.getProfitLoss(),t1.getProfitLoss());
-            }
-        }).limit(n).toList();
+    public static void printLastNTraders(int n){
+        List<Trader> traderCollection = traders.values().stream().sorted((trader, t1) -> Double.compare(trader.getProfitLoss(),t1.getProfitLoss())).limit(n).toList();
 
         traderCollection.forEach(trader -> ls.logInfo(trader.toString()));
     }

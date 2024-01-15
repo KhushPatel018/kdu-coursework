@@ -1,7 +1,15 @@
+package org.example;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvException;
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -13,22 +21,29 @@ public class Main {
     static ExecutorService executorService;
 
     public static  void executeTransactions(JsonNode jsonTransactions, CountDownLatch latch) {
-        executorService = Executors.newFixedThreadPool(jsonTransactions.size());
+        executorService = Executors.newFixedThreadPool((int)latch.getCount());
         for (JsonNode jsonNode: jsonTransactions){
-            executorService.execute(new ExecuteTransaction(jsonNode,latch));
+            executorService.submit(new ExecuteTransaction(jsonNode,latch));
         }
-        try {
-            latch.await();
-        } catch (Exception e) {
-            Thread.currentThread().interrupt();
-            ls.logWarn(e.getMessage());
-        }
-        finally {
-            executorService.shutdown();
-        }
+        executorService.shutdown();
     }
 
+    public static ArrayList<String[]> parseCSV(Path coinCsvPath){
+        List<String[]> ret = new ArrayList<>();
+        String line = "";
+        String filePath = coinCsvPath.toString();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            line = reader.readLine(); // Read and discard the header line
 
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                ret.add(data);
+            }
+        } catch (IOException e) {
+            Thread.currentThread().interrupt();
+        }
+        return (ArrayList<String[]>) ret;
+    }
     public static void main(String[] args){
         // initial coins and traders loaded
         String[] filePaths = {
@@ -38,9 +53,9 @@ public class Main {
         };
         TraderList.parse("/home/hp/code/backend/java fundarmentals/JavaAssignment1/src/main/resources/traders.csv");
         CoinsList.parse("/home/hp/code/backend/java fundarmentals/JavaAssignment1/src/main/resources/coins.csv");
-        String jsonFilePath = filePaths[0];
+        String jsonFilePath = filePaths[1];
         parseJsonFile(jsonFilePath);
-        countDownLatch = new CountDownLatch(jsonNode.size());
+        countDownLatch = new CountDownLatch(jsonNode.size()+1);
         Thread thread = new Thread(() -> executeTransactions(jsonNode,countDownLatch));
         thread.start();
         startApp();
@@ -84,7 +99,7 @@ public class Main {
                     ls.logInfo("Option b selected: Display top N coins");
                     int n = sc.nextInt();
                     sc.nextLine();
-                    CoinsList.PrintTopNcoins(n);
+                    CoinsList.printTopNcoins(n);
                     break;
                 case 'c':
                     ls.logInfo("Option c selected: Show trader portfolio");
@@ -101,9 +116,9 @@ public class Main {
                 case 'e':
                     ls.logInfo("Option e selected: Show top 5 and bottom 5 traders");
                     ls.logInfo("Top five traders : ");
-                    TraderList.PrintTopNTraders(5);
+                    TraderList.printTopNTraders(5);
                     ls.logInfo("Bottom five traders : ");
-                    TraderList.PrintLastNTraders(5);
+                    TraderList.printLastNTraders(5);
                     break;
                 case 'f':
                     // Exit the program

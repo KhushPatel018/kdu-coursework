@@ -1,3 +1,5 @@
+package org.example;
+
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.util.Random;
@@ -50,7 +52,7 @@ public class ExecuteTransaction implements Runnable {
         Trader trader = traders.getTrader(walletAddress);
 
         if (trader == null){
-           ls.logInfo("not a valid Trader");
+           ls.logInfo("not a valid org.example.Trader");
            return;
         }
 
@@ -92,7 +94,7 @@ public class ExecuteTransaction implements Runnable {
         Trader trader = traders.getTrader(walletAddress);
 
         if (trader == null){
-            ls.logInfo("not a valid Trader");
+            ls.logInfo("not a valid org.example.Trader");
             return;
         }
 
@@ -106,7 +108,7 @@ public class ExecuteTransaction implements Runnable {
             while (quantity > supply){
                 try{
                     // volume up or sell
-                    coin.wait();
+                    trader.wait();
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
@@ -118,7 +120,7 @@ public class ExecuteTransaction implements Runnable {
             TraderList.traders.put(walletAddress,trader);
             CoinsList.coins.put(symbol,coin);
             // notifying trader's sell has been done
-            coin.notifyAll();
+            trader.notifyAll();
         }
     }
 

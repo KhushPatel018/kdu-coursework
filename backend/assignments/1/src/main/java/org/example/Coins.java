@@ -1,3 +1,5 @@
+package org.example;
+
 public class Coins {
     public static final LoggingSystem ls = new LoggingSystem();
     private int rank;
@@ -5,6 +7,20 @@ public class Coins {
     private String symbol;
     private double price;
     private long circulationSupply;
+
+    public Coins(){
+
+    }
+
+    public Coins(int i, String bitcoin, String btc, double v, long l) {
+        this.rank = i;
+        this.name = bitcoin;
+        this.symbol = btc;
+        this.price = v;
+        this.circulationSupply = l;
+    }
+
+
 
     public  int getRank() {
         return rank;
@@ -14,11 +30,11 @@ public class Coins {
         this.rank = rank;
     }
 
-    public  String getName() {
+    public  String getCoinName() {
         return name;
     }
 
-    public  void setName(String name) {
+    public  void setCoinName(String name) {
         this.name = name;
     }
 
@@ -26,6 +42,9 @@ public class Coins {
         return symbol;
     }
 
+    public String getCoinSymbol(){
+        return symbol;
+    }
     public  void setSymbol(String symbol) {
         this.symbol = symbol;
     }

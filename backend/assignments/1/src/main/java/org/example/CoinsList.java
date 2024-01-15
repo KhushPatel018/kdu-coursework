@@ -1,9 +1,10 @@
+package org.example;
+
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class CoinsList {
             for (int i = 1; i < r.size(); i++) {
                 String[] coinsDetails = r.get(i);
                 Coins coins1 = new Coins();
-                coins1.setName(coinsDetails[2]);
+                coins1.setCoinName(coinsDetails[2]);
                 coins1.setPrice(Double.parseDouble(coinsDetails[4]));
                 coins1.setRank(Integer.parseInt(coinsDetails[1]));
                 coins1.setSymbol(coinsDetails[3]);
@@ -48,24 +49,11 @@ public class CoinsList {
         return coin;
     }
 
-    public static void logCoins(String address){
-        Coins coin = coins.get(address);
-        if (coin == null) {
-            ls.logInfo("coins doesn't exist with address" + address);
-        } else {
-            coin.printCoinDetails();
-        }
-    }
 
-    public static void PrintTopNcoins(int n){
-        List<Coins> coinsCollection = coins.values().stream().sorted(new Comparator<Coins>() {
-            @Override
-            public int compare(Coins coin, Coins t1) {
-                return Double.compare(t1.getPrice(),coin.getPrice());
-            }
-        }).limit(n).toList();
+    public static void printTopNcoins(int n){
+        List<Coins> coinsCollection = coins.values().stream().sorted((coin, t1) -> Double.compare(t1.getPrice(),coin.getPrice())).limit(n).toList();
 
-        coinsCollection.forEach(coin -> coin.printCoinDetails());
+        coinsCollection.forEach(Coins::printCoinDetails);
     }
 }
 
