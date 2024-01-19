@@ -141,9 +141,10 @@ public class Main {
         CSVWriter writer = new CSVWriter(new FileWriter("/home/hp/code/backend/java fundarmentals/Assesment1/src/main/resources/fixtures.csv"));
         String line1[] = {"Date", "Match number", "Team home", "Team away", "Ground"};
         writer.writeNext(line1);
-        for(String[] line : data) {
-            writer.writeNext(line);
-        }
+//        for(String[] line : data) {
+//            writer.writeNext(line);
+//        }
+        writer.writeAll(data);
         writer.flush();
     }
 
