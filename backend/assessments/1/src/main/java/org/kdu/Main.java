@@ -94,7 +94,7 @@ public class Main {
                 case 3 -> getTop3s();
                 case 4 -> {
                     List<String[]> list = getFixture();
-
+                    ls.logInfo(list.size()+ "");
 //                    list.forEach(strings -> Arrays.stream(strings).forEach(ls::logInfo));
                     try {
                         writeToCSV(list);
@@ -102,6 +102,8 @@ public class Main {
                         ls.logWarn("Didnt able to write in csv");
                         return;
                     }
+                    ls.logInfo("written to csv");
+                    return;
                 }
 
                 case 5 ->ls.logInfo("Exiting Crypto Menu. Goodbye!");
@@ -142,6 +144,7 @@ public class Main {
         for(String[] line : data) {
             writer.writeNext(line);
         }
+        writer.flush();
     }
 
     //Date Match number Team home Teamaway Ground
@@ -175,4 +178,4 @@ public class Main {
         return data;
     }
 
-    }
+}
