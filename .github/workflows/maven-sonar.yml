@@ -31,8 +31,8 @@ jobs:
         run: >
           cd ./backend/revision/1 && mvn install sonar:sonar 
           -Dsonar.verbose=true 
-          -Dsonar.projectKey=${{ secrets.KDUER_NAME }}-BE-Homework-1
-          -Dsonar.projectName=${{ secrets.KDUER_NAME }}-BE-Homework-1
+          -Dsonar.projectKey=${{ secrets.KDUER_NAME }}-BE-Revision-1
+          -Dsonar.projectName=${{ secrets.KDUER_NAME }}-BE-Revision-1
       ## below steps are for posting comment on Github PR
       - name: Setup Node
         uses: actions/setup-node@v3
