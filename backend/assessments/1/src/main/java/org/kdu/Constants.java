@@ -1,30 +1,11 @@
 package org.kdu;
 
 public class Constants {
-    public enum Role{
-        BATSMAN,
-        BOWLER,
-        WICKET_KEEPER,
-        ALL_ROUNDER
 
+    private Constants() {
     }
 
-    public Role getRole(String role)
-    {
-        switch (role){
-            case "BATSMAN" -> {
-                return Role.BATSMAN;
-            }
-            case "WICKET KEEPER" -> {
-                return Role.WICKET_KEEPER;
-            }
-            case "BOWLER" -> {
-                return Role.BOWLER;
-            }
-            case "ALL ROUNDER" -> {
-                return Role.ALL_ROUNDER;
-            }
-        }
-        return Role.BATSMAN;
-    }
+    public static final String IPL_DATA_FILE = "/home/hp/code/backend/java fundarmentals/Assesment1/src/main/resources/IPL_2021-data.csv";
+    public static final String FIXTURE_FILE = "/home/hp/code/backend/java fundarmentals/Assesment1/src/main/resources/fixtures.csv";
+
 }

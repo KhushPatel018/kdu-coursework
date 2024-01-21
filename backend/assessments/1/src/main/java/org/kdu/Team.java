@@ -1,7 +1,6 @@
 package org.kdu;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class Team {
@@ -9,9 +8,10 @@ public class Team {
     private ArrayList<Player> players;
     private String home;
 
-    public Team(String name, ArrayList<Player> players, String home) {
+    public static final LoggingSystem ls = new LoggingSystem();
+    public Team(String name, List<Player> players, String home) {
         this.name = name;
-        this.players = players;
+        this.players = (ArrayList<Player>) players;
         this.home = home;
     }
 
@@ -23,12 +23,12 @@ public class Team {
         this.name = name;
     }
 
-    public ArrayList<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
-    public void setPlayers(ArrayList<Player> players) {
-        this.players = players;
+    public void setPlayers(List<Player> players) {
+        this.players = (ArrayList<Player>) players;
     }
 
     public String getHome() {
@@ -48,63 +48,47 @@ public class Team {
                 '}';
     }
 
-    public String printPlayerList(){
+    public String printPlayerList() {
         String result = "";
         players.forEach(player -> result.concat(player.toString() + "\n"));
         return result;
     }
 
-    public List<Player> getBowlersbyTeam()
-    {
+    public List<Player> getBowlersByTeam() {
         return players.stream().filter(player -> player.getWickets() >= 40).toList();
     }
 
-    public List<Player> getHighestWicketTaker()
-    {
-        List<Player> playerList =  players.stream().sorted(new Comparator<Player>() {
-            @Override
-            public int compare(Player player, Player t1) {
-                return Integer.compare(t1.getWickets(),player.getWickets());
-            }
-        }).toList();
+    public List<Player> getHighestWicketTaker() {
+        List<Player> playerList = players.stream().sorted((player, t1) -> Integer.compare(t1.getWickets(), player.getWickets())).toList();
+        Player player = playerList.get(0);
+        if(player == null){
+            ls.logWarn("No such player exist in sorted list");
+            return new ArrayList<>();
+        }
+        int highest = player.getWickets();
 
-        int highest = playerList.get(0).getWickets();
-
-        return playerList.stream().filter(player -> player.getWickets() == highest).toList();
+        return playerList.stream().filter(player1 -> player1.getWickets() == highest).toList();
     }
 
-    public List<Player> getTopNWicketTaker(int n)
-    {
-        return players.stream().sorted(new Comparator<Player>() {
-            @Override
-            public int compare(Player player, Player t1) {
-                return Integer.compare(t1.getWickets(),player.getWickets());
-            }
-        }).limit(n).toList();
+    public List<Player> getTopNWicketTaker(int n) {
+        return players.stream().sorted((player, t1) -> Integer.compare(t1.getWickets(), player.getWickets())).limit(n).toList();
     }
 
-    public List<Player> getHighestRunScorer()
-    {
-        List<Player> playerList =  players.stream().sorted(new Comparator<Player>() {
-            @Override
-            public int compare(Player player, Player t1) {
-                return Integer.compare(t1.getRuns(),player.getRuns());
-            }
-        }).toList();
+    public List<Player> getHighestRunScorer() {
+        List<Player> playerList = players.stream().sorted((player, t1) -> Integer.compare(t1.getRuns(), player.getRuns())).toList();
 
-        int highest = playerList.get(0).getRuns();
+        Player player = playerList.get(0);
+        if(player == null){
+            ls.logWarn("No such player exist in sorted list");
+            return new ArrayList<>();
+        }
+        int highest = player.getRuns();
 
-        return playerList.stream().filter(player -> player.getRuns() == highest).toList();
+        return playerList.stream().filter(player1 -> player1.getRuns() == highest).toList();
     }
 
-    public List<Player> topNRunScorer(int n)
-    {
-       return players.stream().sorted(new Comparator<Player>() {
-            @Override
-            public int compare(Player player, Player t1) {
-                return Integer.compare(t1.getRuns(),player.getRuns());
-            }
-        }).limit(n).toList();
+    public List<Player> topNRunScorer(int n) {
+        return players.stream().sorted((player, t1) -> Integer.compare(t1.getRuns(), player.getRuns())).limit(n).toList();
 
     }
 
