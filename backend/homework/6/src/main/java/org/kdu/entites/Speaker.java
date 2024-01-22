@@ -3,7 +3,6 @@ package org.kdu.entites;
 import org.kdu.Constants;
 
 
-
 public class Speaker {
     private Constants.speakerBrand brand;
     private double price;
@@ -31,9 +30,6 @@ public class Speaker {
 
     @Override
     public String toString() {
-        return "{" +
-                "brand =" + brand +
-                ", price =" + price +
-                '}';
+        return "{" + "brand =" + brand + ", price =" + price + '}';
     }
 }
