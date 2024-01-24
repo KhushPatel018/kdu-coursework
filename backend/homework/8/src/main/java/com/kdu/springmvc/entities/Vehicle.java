@@ -1,22 +1,28 @@
 package com.kdu.springmvc.entities;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import org.springframework.format.annotation.NumberFormat;
+
 
 public class Vehicle {
 
-    @NumberFormat
+
     private Integer id;
-    @NotBlank
+
     private String name;
-    @NotNull
+
     private Speaker speaker;
-    @NotNull
+
     private Tyre tyre;
     private double price;
 
     private Vehicle() {
         // Private constructor to force the use of the builder
+    }
+
+    public Vehicle(Integer id, String name, Speaker speaker, Tyre tyre, double price) {
+        this.id = id;
+        this.name = name;
+        this.speaker = speaker;
+        this.tyre = tyre;
+        this.price = price;
     }
 
     public static class VehicleBuilder {

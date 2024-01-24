@@ -2,9 +2,13 @@ package com.kdu.springmvc.dtos.request;
 
 import com.kdu.springmvc.dtos.SpeakerDTO;
 import com.kdu.springmvc.dtos.TyreDTO;
+import jakarta.validation.constraints.NotBlank;
+import org.springframework.format.annotation.NumberFormat;
 
 public class VehicleRequestDTO {
+    @NumberFormat
     private Integer id;
+    @NotBlank
     private String name;
     private SpeakerDTO speaker;
     private TyreDTO tyre;
@@ -12,6 +16,14 @@ public class VehicleRequestDTO {
 
     private VehicleRequestDTO() {
         // Private constructor to force the use of the builder
+    }
+
+    public VehicleRequestDTO(Integer id, String name, SpeakerDTO speaker, TyreDTO tyre, double price) {
+        this.id = id;
+        this.name = name;
+        this.speaker = speaker;
+        this.tyre = tyre;
+        this.price = price;
     }
 
     public static class Builder {

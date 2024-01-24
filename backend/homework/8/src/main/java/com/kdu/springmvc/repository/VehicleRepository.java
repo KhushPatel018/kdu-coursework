@@ -1,7 +1,5 @@
 package com.kdu.springmvc.repository;
-
 import com.kdu.springmvc.entities.Vehicle;
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -12,7 +10,7 @@ import java.util.Optional;
 public class VehicleRepository {
     private final List<Vehicle> vehicles = new ArrayList<>();
 
-    public void save(@Valid Vehicle vehicle) {
+    public void save(Vehicle vehicle) {
         vehicles.add(vehicle);
     }
 
