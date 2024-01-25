@@ -1,0 +1,5 @@
+<!-- logback-prod.xml -->
+<configuration>
+    <springProperty scope="context" name="log-level" source="logging.level.root" defaultValue="ERROR" />
+    <include resource="logback-common.xml" />
+</configuration>
