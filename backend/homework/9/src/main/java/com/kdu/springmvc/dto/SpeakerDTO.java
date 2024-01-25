@@ -21,8 +21,9 @@ public class SpeakerDTO {
     @Override
     public String toString() {
         return "{" +
-                "brand='" + brand + '\'' +
-                ", price=" + price +
+                "\n    brand='" + brand + '\'' +
+                ",\n    price=" + price +
+                '\n' +
                 '}';
     }
 }

@@ -1,6 +1,5 @@
 package com.kdu.springmvc.service;
 
-
 import com.kdu.springmvc.dto.SpeakerDTO;
 import com.kdu.springmvc.dto.TyreDTO;
 import com.kdu.springmvc.dto.request.VehicleRequestDTO;
@@ -10,14 +9,24 @@ import com.kdu.springmvc.entity.Tyre;
 import com.kdu.springmvc.entity.Vehicle;
 import org.springframework.stereotype.Service;
 
-
+/**
+ * Service class for mapping between DTOs (Data Transfer Objects) and entities.
+ */
 @Service
 public class MapperService {
 
+    /**
+     * Private constructor to prevent instantiation since it's a utility class.
+     */
     private MapperService() {
-
     }
 
+    /**
+     * Converts a VehicleRequestDTO to a Vehicle entity.
+     *
+     * @param vehicleRequestDTO The DTO containing information to be mapped to the entity.
+     * @return Vehicle entity with information from the DTO.
+     */
     public static Vehicle toEntity(VehicleRequestDTO vehicleRequestDTO) {
         return new Vehicle.VehicleBuilder()
                 .id(vehicleRequestDTO.getId())
@@ -28,6 +37,12 @@ public class MapperService {
                 .build();
     }
 
+    /**
+     * Converts a Vehicle entity to a VehicleResponseDTO.
+     *
+     * @param vehicle The entity containing information to be mapped to the DTO.
+     * @return VehicleResponseDTO with information from the entity.
+     */
     public static VehicleResponseDTO toDTO(Vehicle vehicle) {
         return new VehicleResponseDTO.Builder()
                 .id(vehicle.getId())
@@ -37,5 +52,4 @@ public class MapperService {
                 .price(vehicle.getPrice())
                 .build();
     }
-
 }

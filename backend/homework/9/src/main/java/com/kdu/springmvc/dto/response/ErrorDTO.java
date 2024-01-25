@@ -12,8 +12,9 @@ public class ErrorDTO {
     @Override
     public String toString() {
         return "Error{" +
-                "message='" + message + '\'' +
-                ", statusCode=" + statusCode +
+                "\n    message='" + message + '\'' +
+                ",\n    statusCode=" + statusCode +
+                '\n' +
                 '}';
     }
 }

@@ -74,11 +74,12 @@ public class VehicleResponseDTO {
     @Override
     public String toString() {
         return "VehicleResponseDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", speaker=" + speaker.toString() +
-                ", tyre=" + tyre.toString() +
-                ", price=" + price +
+                "\n    id=" + id +
+                ",\n    name='" + name + '\'' +
+                ",\n    speaker=" + speaker.toString() +
+                ",\n    tyre=" + tyre.toString() +
+                ",\n    price=" + price +
+                '\n' +
                 '}';
     }
 }
