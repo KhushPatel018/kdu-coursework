@@ -3,6 +3,9 @@ package com.caching.service;
 import com.caching.entity.Location;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -14,8 +17,22 @@ public class CacheValidatorService {
     /**
      * The restricted place used for caching validation.
      */
-    public static final String PLACE = "goa";
+    List<String> restrictedPlaces = new ArrayList<>(Arrays.asList("goa","mumbai"));
 
+    /**
+     * @param place place to add to the list
+     */
+    public void addRestrictedCachingPlace(String place){
+        restrictedPlaces.add(place.toLowerCase());
+    }
+
+    /**
+     * @param place all places related to this will be removed
+     */
+    public void removeRestrictedCachingPlace(String place)
+    {
+        restrictedPlaces.removeIf(item -> place.toLowerCase().equals(item));
+    }
     /**
      * Checks if the provided location is restricted for caching.
      *
@@ -23,10 +40,25 @@ public class CacheValidatorService {
      * @return True if the location is restricted, false otherwise.
      */
     public boolean checkForRestrictedCaching(Location location) {
-        if (checkNull(location.getAddress()) && location.getAddress().toLowerCase().contains(PLACE)) return true;
-        if (checkNull(location.getCity()) && location.getCity().toLowerCase().contains(PLACE)) return true;
-        if (checkNull(location.getState()) && location.getState().toLowerCase().contains(PLACE)) return true;
-        return checkNull(location.getCountry()) && location.getCountry().toLowerCase().contains(PLACE);
+        for(String place : restrictedPlaces)
+        {
+            if(checkForRestrictedCachingItem(location,place))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * operates on single item
+     */
+    public boolean checkForRestrictedCachingItem(Location location,String item)
+    {
+        if (checkNull(location.getAddress()) && location.getAddress().toLowerCase().contains(item)) return true;
+        if (checkNull(location.getCity()) && location.getCity().toLowerCase().contains(item)) return true;
+        if (checkNull(location.getState()) && location.getState().toLowerCase().contains(item)) return true;
+        return checkNull(location.getCountry()) && location.getCountry().toLowerCase().contains(item);
     }
 
     /**
