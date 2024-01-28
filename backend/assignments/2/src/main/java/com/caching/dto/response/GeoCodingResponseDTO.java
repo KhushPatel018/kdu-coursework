@@ -12,4 +12,12 @@ public class GeoCodingResponseDTO {
     Double longitude;
     @Setter
     String responseMessage;
+
+    @Override
+    public String toString() {
+        return "GeoCodingResponseDTO{" +
+                "latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
+    }
 }

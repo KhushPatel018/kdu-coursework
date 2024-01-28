@@ -10,4 +10,11 @@ public class RevGeoCodingResponseDTO {
     String address;
     @Setter
     String responseMessage;
+
+    @Override
+    public String toString() {
+        return "RevGeoCodingResponseDTO{" +
+                "address='" + address + '\'' +
+                '}';
+    }
 }
