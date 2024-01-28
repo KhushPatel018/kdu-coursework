@@ -18,7 +18,7 @@ public class CacheConfig {
     @Bean
     public Caffeine<Object, Object> caffeineConfig() {
         return Caffeine.newBuilder()
-                .maximumSize(3)  // after it reaches the maxsize it will evict in LRU fashion
+                .maximumSize(3)  // after it reaches the maxsize it will evict in LRU fashion --> 3 for testing purposes
                 .expireAfterAccess(30, TimeUnit.MINUTES); // time bases eviction
     }
 

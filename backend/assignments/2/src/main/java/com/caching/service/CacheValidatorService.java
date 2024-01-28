@@ -17,7 +17,7 @@ public class CacheValidatorService {
     /**
      * The restricted place used for caching validation.
      */
-    List<String> restrictedPlaces = new ArrayList<>(Arrays.asList("goa","mumbai"));
+     List<String> restrictedPlaces = new ArrayList<>(Arrays.asList("goa","mumbai"));
 
     /**
      * @param place place to add to the list
