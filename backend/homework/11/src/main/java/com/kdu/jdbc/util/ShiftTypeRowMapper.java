@@ -32,7 +32,7 @@ public class ShiftTypeRowMapper implements RowMapper<ShiftType> {
     private SHIFT_TYPE getShiftType(String type){
         if(type.equals("Morning"))
         {
-            return SHIFT_TYPE.Morning;
-        }else return (type.equals("Afternoon") ? SHIFT_TYPE.Afternoon : SHIFT_TYPE.Evening);
+            return SHIFT_TYPE.MORNING;
+        }else return (type.equals("Afternoon") ? SHIFT_TYPE.AFTERNOON : SHIFT_TYPE.EVENING);
     }
 }

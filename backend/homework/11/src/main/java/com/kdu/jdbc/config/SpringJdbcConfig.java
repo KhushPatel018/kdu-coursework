@@ -3,6 +3,7 @@ package com.kdu.jdbc.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
@@ -18,5 +19,12 @@ public class SpringJdbcConfig {
         dataSource.setUsername("postgres");
         dataSource.setPassword("newpassword");
         return dataSource;
+    }
+
+    @Bean
+    public JdbcTemplate getJdbcTemplate() {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+        jdbcTemplate.setDataSource(mysqlDataSource());
+        return jdbcTemplate;
     }
 }
