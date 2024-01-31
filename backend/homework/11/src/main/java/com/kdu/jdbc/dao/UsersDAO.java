@@ -17,22 +17,22 @@ public class UsersDAO {
     private UserRowMapper rowMapper = new UserRowMapper();
 
     public List<User> getAllById(UUID id){
-       return jdbcTemplate.query("select * from users where tenant_id = '?'",rowMapper,id);
+       return jdbcTemplate.query("select * from users where tenant_id = ?",rowMapper,id);
     }
 
     public int update(UUID id,User user){
-        return jdbcTemplate.update("update users set username = ? , loggedin = ? , time_zone = ? where id = '?'",user.getUsername(),user.getLoggedin(),user.getTimezone(),id);
+        return jdbcTemplate.update("update users set username = ? , loggedin = ? , time_zone = ? where id = ?",user.getUsername(),user.getLoggedin(),user.getTimezone(),id);
     }
 
     private boolean isPresent(UUID id){
         return !getAllById(id).isEmpty();
     }
     public void save(User user) {
-        if(isPresent(user.getId())){
+        if(user.getId() != null && isPresent(user.getId())){
             log.error("User Already Exist");
             return;
         }
-        int row = jdbcTemplate.update("insert into users(username,loggedin,time_zone,tenant_id) values (?,?,?,'?')",user.getUsername(),user.getLoggedin(),user.getTimezone(),user.getTenantId());
+        int row = jdbcTemplate.update("insert into users(username,loggedin,time_zone,tenant_id) values (?,?,?,?)",user.getUsername(),user.getLoggedin(),user.getTimezone(),user.getTenantId());
         log.info("rows affected : " + row);
     }
 }

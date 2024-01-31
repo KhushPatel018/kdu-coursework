@@ -17,18 +17,18 @@ public class ShiftTypeDAO {
     private ShiftTypeRowMapper rowMapper = new ShiftTypeRowMapper();
 
     public List<ShiftType> getAllById(UUID id){
-        return jdbcTemplate.query("select * from shift_types where tenant_id = '?'",rowMapper,id);
+        return jdbcTemplate.query("select * from shift_types where tenant_id = ?",rowMapper,id);
     }
     private boolean isPresent(UUID id){
         return !getAllById(id).isEmpty();
     }
 
     public void save(ShiftType shiftType) {
-        if(isPresent(shiftType.getId())){
+        if(shiftType.getId() != null && isPresent(shiftType.getId())){
             log.error("User Already Exist");
             return;
         }
-        int row = jdbcTemplate.update("insert into shift_types(uq_name,description,active,time_zone,tenant_id) values (?,?,?,?,'?')",shiftType.getName(),shiftType.getDescription(),shiftType.isActive(),shiftType.getTimezone(),shiftType.getTenantId());
+        int row = jdbcTemplate.update("insert into shift_types(uq_name,description,active,time_zone,tenant_id) values (?,?,?,?,?)",shiftType.getName(),shiftType.getDescription(),shiftType.isActive(),shiftType.getTimezone(),shiftType.getTenantId());
         log.info("rows affected : " + row);
     }
 }

@@ -18,7 +18,7 @@ public class ShiftUsersDAO {
     private ShiftUserRowMapper rowMapper = new ShiftUserRowMapper();
 
     public List<ShiftUser> getAllById(UUID id){
-        return jdbcTemplate.query("select * from shift_user where tenant_id = '?'",rowMapper,id);
+        return jdbcTemplate.query("select * from shift_user where tenant_id = ?",rowMapper,id);
     }
 
     private boolean isPresent(UUID id){
@@ -27,11 +27,11 @@ public class ShiftUsersDAO {
 
 
     public void save(ShiftUser shiftUser) {
-        if(isPresent(shiftUser.getId())){
+        if(shiftUser.getId() != null && isPresent(shiftUser.getId())){
             log.error("User Already Exist");
             return;
         }
-        int row = jdbcTemplate.update("insert into shift_types(shift_id,user_id,tenant_id) values ('?','?',?')",shiftUser.getShiftId(),shiftUser.getUserId(),shiftUser.getTenantId());
+        int row = jdbcTemplate.update("insert into shift_types(shift_id,user_id,tenant_id) values (?,?,?)",shiftUser.getShiftId(),shiftUser.getUserId(),shiftUser.getTenantId());
         log.info("rows affected : " + row);
     }
 }

@@ -66,4 +66,9 @@ public class TenantService {
             return new ResponseEntity<>("User not found",HttpStatus.NOT_FOUND);
         }else return ResponseEntity.ok("User updated successfully");
     }
+
+    public ResponseEntity<Tenant> getTenant(String id) {
+
+        return new ResponseEntity<>(tenantDAO.getById(UUID.fromString(id)),HttpStatus.OK);
+    }
 }
