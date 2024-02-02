@@ -27,8 +27,8 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<Product>> getProductByCart(@PathVariable Long cartId){
-        return ResponseEntity.ok(productService.getAllByCart(cartId));
+    public ResponseEntity<List<Product>> getProductByCart(@PathVariable Long id){
+        return ResponseEntity.ok(productService.getAllByCart(id));
     }
 
 }

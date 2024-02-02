@@ -1,9 +1,6 @@
 package com.kdu.assesment.service;
 
-import com.kdu.assesment.controller.OrderController;
-import com.kdu.assesment.entity.Inventory;
 import com.kdu.assesment.entity.Order;
-import com.kdu.assesment.repository.InventoryRepository;
 import com.kdu.assesment.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 

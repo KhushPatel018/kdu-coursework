@@ -18,7 +18,7 @@ public class OrderController {
         this.orderService = orderService;
     }
     @PostMapping
-    public ResponseEntity<String> PlaceOrder(@RequestBody Order order)
+    public ResponseEntity<String> placeOrder(@RequestBody Order order)
     {
         orderService.addOrder(order);
         return ResponseEntity.ok("Order placed with cart " + order.getCart().getId());

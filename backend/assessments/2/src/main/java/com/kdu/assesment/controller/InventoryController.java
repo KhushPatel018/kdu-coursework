@@ -1,6 +1,6 @@
 package com.kdu.assesment.controller;
 
-import com.kdu.assesment.entity.Address;
+
 import com.kdu.assesment.entity.Inventory;
 import com.kdu.assesment.service.InventoryService;
 import org.springframework.http.ResponseEntity;

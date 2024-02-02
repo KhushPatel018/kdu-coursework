@@ -1,8 +1,6 @@
 package com.kdu.assesment.service;
 
-import com.kdu.assesment.entity.Address;
 import com.kdu.assesment.entity.Product;
-import com.kdu.assesment.repository.AddressRepository;
 import com.kdu.assesment.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
