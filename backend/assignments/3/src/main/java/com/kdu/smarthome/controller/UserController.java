@@ -12,20 +12,35 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller class for authentication-related endpoints.
+ */
 @RestController
 @RequestMapping("/api/v1/auth")
 public class UserController {
     private final AuthService authService;
 
+    /**
+     * Constructor for UserController.
+     *
+     * @param authService The service for authentication-related operations.
+     */
     public UserController(AuthService authService) {
         this.authService = authService;
     }
 
+    /**
+     * Endpoint for user registration.
+     *
+     * @param registerUserRequestDTO    The DTO containing information about the user to be registered.
+     * @return                          ResponseEntity containing the response DTO.
+     */
     @PostMapping("/register")
     public ResponseEntity<UserResponseDTO> registerUser(@Valid @RequestBody RegisterUserRequestDTO registerUserRequestDTO) {
         try {
             return ResponseEntity.ok(authService.register(registerUserRequestDTO));
         } catch (AuthenticationException e) {
+            // Return UNAUTHORIZED status if authentication fails
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }

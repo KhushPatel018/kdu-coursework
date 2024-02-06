@@ -14,6 +14,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+
+/**
+ * Filter responsible for authenticating requests using JWT tokens.
+ */
 @Component
 public class AuthFilter extends OncePerRequestFilter {
     private final UserDetailsService userDetailsService;

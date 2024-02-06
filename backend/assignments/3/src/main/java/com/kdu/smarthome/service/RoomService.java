@@ -13,6 +13,9 @@ import com.kdu.smarthome.repository.HouseRepository;
 import com.kdu.smarthome.repository.RoomRepository;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service class for handling room-related operations.
+ */
 @Service
 public class RoomService {
     private final RoomRepository roomRepository;
@@ -20,6 +23,16 @@ public class RoomService {
     private final TokenService tokenService;
     private final HouseOwnerRepository houseOwnerRepository;
     private final MapperService mapperService;
+
+    /**
+     * Constructor for RoomService.
+     *
+     * @param roomRepository         The repository for room data.
+     * @param houseRepository        The repository for house data.
+     * @param tokenService           The service for token-related operations.
+     * @param houseOwnerRepository   The repository for house ownership data.
+     * @param mapperService          The service for mapping DTOs to entities.
+     */
     public RoomService(RoomRepository roomRepository, HouseRepository houseRepository, TokenService tokenService,
                        HouseOwnerRepository houseOwnerRepository, MapperService mapperService) {
         this.roomRepository = roomRepository;
@@ -29,23 +42,33 @@ public class RoomService {
         this.mapperService = mapperService;
     }
 
-   
+    /**
+     * Adds a room to a house.
+     *
+     * @param houseId              The ID of the house to which the room will be added.
+     * @param addRoomRequestDTO    The DTO containing information about the room to be added.
+     * @param token                The token for authentication.
+     * @return                     The response DTO indicating the result of the addition process.
+     * @throws UnauthorizedUserAccessException If the user doesn't have admin access to the house.
+     * @throws EntityNotFoundException        If the requested house is not found.
+     * @throws UnprocessableEntityException   If an error occurs during the addition process.
+     */
     public RoomResponseDTO addRoomToHouse(String houseId, AddRoomRequestDTO addRoomRequestDTO, String token) {
         try {
             String username = tokenService.extractUsername(token.substring(7));
             if (!(houseOwnerRepository.findByHouse_IdAndUser_Username(houseId, username)
                     .getRole().equals(RoleUser.ADMIN))) {
-                throw new UnauthorizedUserAccessException("User does not have admin access");
+                throw new UnauthorizedUserAccessException("User should be admin access for this functionality");
             }
-            House house = houseRepository.findById(houseId).orElseThrow(()-> new EntityNotFoundException("House with given id does not exist"));
+            House house = houseRepository.findById(houseId).orElseThrow(() -> new EntityNotFoundException("House with given id doesn't found"));
             Room room = mapperService.toEntity(house, addRoomRequestDTO);
-            return mapperService.toDTO(roomRepository.save(room), "Room added to given house");
+            return mapperService.toDTO(roomRepository.save(room), "Room added to house");
         } catch (UnauthorizedUserAccessException e) {
-            throw new UnauthorizedUserAccessException("Room cannot be added. " + e.getMessage());
+            throw new UnauthorizedUserAccessException("Room can't be added. " + e.getMessage());
         } catch (EntityNotFoundException e) {
-            throw new EntityNotFoundException("Room cannot be added. " + e.getMessage());
+            throw new EntityNotFoundException("Room can't be added. " + e.getMessage());
         } catch (Exception e) {
-            throw new UnprocessableEntityException("Room cannot be added please check again");
+            throw new UnprocessableEntityException("Room can't be added please check again");
         }
     }
 }
