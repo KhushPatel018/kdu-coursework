@@ -568,6 +568,8 @@ $main-text: #e7e9ea;
                 height: 130px;
                 padding: 13px 0;
                 border: none;
+                color: $main-text;
+                font-size: 15px;    
             }
             textarea::placeholder {
                 font-size: 23px;
@@ -684,19 +686,11 @@ $main-text: #e7e9ea;
                         display: flex;
                         align-items: center;
                         justify-items: center;
-                        p {
-                            font-size: 14px;
-                            color: #f91880;
-                        }
                     }
                     .state-container {
                         display: flex;
                         align-items: center;
                         justify-items: center;
-                        p {
-                            font-size: 14px;
-                            color: $sub-text;
-                        }
                     }
                 }
             }
