@@ -13,7 +13,7 @@ module.exports = defineConfig({
   // Configuration for end-to-end (e2e) tests
   e2e: {
     // Base URL for your application
-    baseUrl: "https://khushfrontendassignment.z33.web.core.windows.net/",
+    baseUrl: "https://XbyKhush.azureedge.net",
 
     // Setup Node events for visual regression testing using cypress-visual-regression plugin
     setupNodeEvents(on, config) {
