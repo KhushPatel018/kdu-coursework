@@ -1,10 +1,11 @@
 const fs = require("fs").promises;
 const os = require("os");
 const express = require("express");
+const http = require('http');
 const app = express();
-
+const server = http.createServer(app);
 // Start the server
-app.listen(8081, () => {
+server.listen(8080, () => {
   console.log("app is running in port 8080");
 });
 
