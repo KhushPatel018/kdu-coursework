@@ -1,7 +1,7 @@
-let fs = require("fs").promises;
-let os = require("os");
-let express = require("express");
-let app = express();
+const fs = require("fs").promises;
+const os = require("os");
+const express = require("express");
+const app = express();
 
 app.listen(8081, () => {
   console.log("app is running in port 8080");
@@ -9,7 +9,7 @@ app.listen(8081, () => {
 
 //a. Os :
 const createJson = () => {
-  let jsonObj = {
+  const jsonObj = {
     hostName: os.hostname(),
     operatingSystem: os.platform(),
     Architecture: os.arch(),
@@ -20,19 +20,21 @@ const createJson = () => {
     freeMemory: os.freemem(),
     CurrentWorkingDirectory: process.cwd(),
   };
-  console.log("A : OS RESULT OBJECT : \n",JSON.stringify(jsonObj, null, 2));
+  console.log("A : OS RESULT OBJECT : \n", JSON.stringify(jsonObj, null, 2));
   fs.writeFile("./test.json", JSON.stringify(jsonObj, null, 2))
     .then(() => console.log("written to file"))
     .catch((err) => console.log(err));
 };
 
 const parseData = (data) => {
-  let jsonString = JSON.stringify(data, null, 2);
+  const jsonString = JSON.stringify(data, null, 2);
   return `
     Hello, my name is Khush Patel!
     Here is my system information:
     ${jsonString}.`;
 };
+
+// function call
 createJson();
 
 app.get("/", (req, res) => {
@@ -57,7 +59,10 @@ function extractFileInfo(filePath) {
 }
 
 const filePath = "/home/hp/code/FrontEnd/NodeJs/handsOn/test.json";
-console.log("B. PATH RESULT OF extractFileInfo : \n",JSON.stringify(extractFileInfo(filePath), null, 2));
+console.log(
+  "B. PATH RESULT OF extractFileInfo : \n",
+  JSON.stringify(extractFileInfo(filePath), null, 2)
+);
 
 const filePaths = [
   "./dir1/dir2/file1.txt",
@@ -67,12 +72,11 @@ const filePaths = [
   "./dir4/file5.pdf",
 ];
 
-function processFilePaths(filePaths) {
-  let result = Array();
-  filePaths.forEach((filePath) => {
-    result.push(extractFileInfo(filePath));
-  });
-  return result;
-}
+const processFilePaths = (filePaths) => {
+  return filePaths.map(extractFileInfo);
+};
 
-console.log( "B. PATH RESULT OF processFilePaths : \n",JSON.stringify(processFilePaths(filePaths),null,2));
+console.log(
+  "B. PATH RESULT OF processFilePaths : \n",
+  JSON.stringify(processFilePaths(filePaths), null, 2)
+);
