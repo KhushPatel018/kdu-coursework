@@ -17,10 +17,10 @@ describe("Like Post", () => {
     cy.get(".post-input").type(tweetText);
 
     // Check if the 'tweet-btn' button is enabled
-    cy.get("#tweet-btn").should("not.be.disabled");
+    cy.get(".tweet-btn").should("not.be.disabled");
 
     // Click the 'tweet-btn' button
-    cy.get("#tweet-btn").click();
+    cy.get(".tweet-btn").click();
 
     // Wait for the tweet to be posted
     cy.wait(2000);
