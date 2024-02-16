@@ -98,6 +98,7 @@
         const inputBox = document.querySelector("#quntity");
         console.log("clicked");
         let msg = inputBox.value;
+        const value = document.querySelector(".value");
         console.log(msg);
         msg = msg.trim();
         if (!msg) {
@@ -105,7 +106,7 @@
         }
         const tran = document.createElement('div');
         tran.classList.add('transection');
-        tran.innerText = `${msg} Stockes  ${name}`
+        tran.innerText = `${msg} Stockes at price : ${value.innerText} ${name}`
         transactionBox.appendChild(tran);
         inputBox.value = "";
         transactionBox.scrollTop = transactionBox.scrollHeight;
