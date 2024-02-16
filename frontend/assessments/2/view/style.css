@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+*::after,
+*::before,
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  height: 100vh;
+  width: 100vw;
+}
+.container .header {
+  height: 13%;
+  padding: 0.5em 0.2em;
+  background-color: #1871c2;
+  text-align: left;
+  color: white;
+  font-size: 2rem;
+}
+.container .wrapper {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.container .wrapper .stock-container {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+.container .wrapper .stock-container .display {
+  height: 13%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1em;
+}
+.container .wrapper .stock-container .display .company {
+  width: 23%;
+  height: 60%;
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid black;
+  padding: 0.5em;
+}
+.container .wrapper .stock-container .display .company #logo {
+  height: 35px;
+  width: 45px;
+}
+.container .wrapper .stock-container .display .company .name {
+  font-size: 1.2rem;
+}
+.container .wrapper .stock-container .display .price {
+  width: 35%;
+  height: 60%;
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid black;
+  align-items: center;
+}
+.container .wrapper .stock-container .display .price .lable {
+  font-size: 1.2rem;
+}
+.container .wrapper .stock-container .display .price .value {
+  font-size: 1.2rem;
+}
+.container .wrapper .stock-container .display .price .hike {
+  font-size: 0.5rem;
+}
+.container .wrapper .stock-container .display #quntity {
+  width: 20%;
+  height: 60%;
+  font-size: 1rem;
+  text-align: center;
+  outline: none;
+  border: 1px solid black;
+}
+.container .wrapper .stock-container .display #buy {
+  width: 5%;
+  height: 60%;
+  padding: 0.4em;
+  background-color: #b2f2bb;
+  color: #2f9e44;
+  border: 1px solid #2f9e44;
+}
+.container .wrapper .stock-container .display #sell {
+  width: 7%;
+  height: 60%;
+  padding: 0.4em;
+  background-color: #ffc9c9;
+  color: #e03131;
+  border: 1px solid #e03131;
+}
+.container .wrapper .stock-container .chart {
+  width: 90%;
+  height: 500px;
+  border: 1px solid black;
+  position: relative;
+}
+.container .wrapper .stock-container .chart .background {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(5, 100px);
+}
+.container .wrapper .stock-container .chart .bar-container {
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: end;
+}
+.container .wrapper .stock-container .chart .bar-container .green-bar {
+  height: 100px;
+  width: 20px;
+  background-color: #b2f2bb;
+  border: 1px solid #2f9e44;
+}
+.container .wrapper .stock-container .chart .bar-container .red-bar {
+  height: 50px;
+  width: 20px;
+  background-color: #ffc9c9;
+  border: 1px solid #e03131;
+}
+.container .wrapper .history {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+}
+.container .wrapper .history .heading {
+  height: 10%;
+  font-size: 2rem;
+  padding: 1em;
+}/*# sourceMappingURL=style.css.map */
