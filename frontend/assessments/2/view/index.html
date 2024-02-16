@@ -22,8 +22,8 @@
               <div class="hike">3.00%</div>
             </div>
             <input type="number" id="quntity" placeholder="enter QTY" />
-            <button id="buy" onclick="handleClick()">BUY</button>
-            <button id="sell">SELL</button>
+            <button id="buy" onclick="handleClick('buy')">BUY</button>
+            <button id="sell" onclick="handleClick('sell')">SELL</button>
           </div>
           <div class="chart">
             <div class="background"></div>
@@ -93,7 +93,7 @@
         hike.innerText = `${hikeValue}%`;
       }
 
-      const handleClick = () => {
+      const handleClick = (name) => {
         const transactionBox = document.querySelector(".transaction-box");
         const inputBox = document.querySelector("#quntity");
         console.log("clicked");
@@ -103,14 +103,13 @@
         if (!msg) {
           return false;
         }
-        socket.emit("message", msg);
+        const tran = document.createElement('div');
+        tran.classList.add('transection');
+        tran.innerText = `${msg} Stockes  ${name}`
+        transactionBox.appendChild(tran);
         inputBox.value = "";
         transactionBox.scrollTop = transactionBox.scrollHeight;
       };
-
-    //   document.addEventListener('DOMContentLoaded',() => {
-
-    //   })
 
     </script>
   </body>
