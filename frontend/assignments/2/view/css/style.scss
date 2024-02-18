@@ -57,18 +57,21 @@ $main-text: #e7e9ea;
 }
 
 .container {
-    height: 100vh;
     width: 100vw;
     display: flex;
     justify-content: space-between;
+    position: relative;
     .left-side-space {
         height: 100%;
-        width: 7%;
+        width: 5%;
+        position: sticky;
+        top: 0;
     }
     .navigation-section {
         height: 100%;
         width: 20%;
-        // position: fixed;
+        position: sticky;
+        top: 0;
         display: flex;
         flex-direction: column;
         row-gap: 0.3em;
@@ -166,7 +169,7 @@ $main-text: #e7e9ea;
     }
     .middle-section {
         height: 100%;
-        width: 40%;
+        width: 42%;
         border-left: 1.7px solid $sub-text;
         border-right: 1.7px solid $sub-text;
         .add-post-wrapper {
@@ -350,13 +353,124 @@ $main-text: #e7e9ea;
             }
         }
     }
-    .last-section {
-        height: 100%;
-        width: 20%;
+    .messages {
+        height: 100vh;
+        width: 32%;
+        border: 1.7px solid $sub-text;
+        display: flex;
+        flex-direction: column;
+        .title {
+            font-size: 1.1rem;
+            padding: 0.3em 0.7em;
+            color: $main-text;
+            font-weight: 600;
+        }
+        .users {
+            display: flex;
+            flex-direction: column;
+            border: 1.7px solid $sub-text;
+
+            .user {
+                display: flex;
+                margin-top: 3px;
+                padding: 0.3em 0.7em;
+                align-items: center;
+                // background-color: rgb(34, 34, 34);
+                border-radius: 25px;
+                img {
+                    height: 44px;
+                    width: 44px;
+                    border-radius: 50%;
+                }
+                .name {
+                    font-size: 0.9rem;
+                    padding: 0.3em 0em;
+                    padding-left: 1em;
+                    color: $main-text;
+                    font-weight: 500;
+                    background: transparent;
+                }
+                .tag {
+                    font-size: 0.9rem;
+                    padding: 0.3em 0.2em;
+                    color: $sub-text;
+                    font-weight: 400;
+                    background: transparent;
+                }
+            }
+        }
     }
-    .right-side-space {
-        height: 100%;
-        width: 7%;
+    .message-box {
+        height: 100vh;
+        width: 42%;
+        .msg-box-heading {
+            font-size: 1.1rem;
+            padding: 0.3em 0.7em;
+            color: $main-text;
+            font-weight: 600;
+            border-bottom: 1.7px solid $sub-text;
+        }
+        .msg-container {
+            height: 90%;
+            border-bottom: 1.7px solid $sub-text;
+            display: flex;
+            flex-direction: column;
+            padding: 0.5em 0.8em;
+            .message-wrapper{
+                display: flex;
+                flex-direction: column;
+                width: 40%;
+                .message {
+                    font-size: 0.9rem;
+                    padding: 0.3em 0.7em;
+                    color: $main-text;
+                    font-weight: 400;
+                    background-color: $sub-text;
+                    width: 100%;
+                    border-radius: 25px 25px 25px 3px;
+                    margin-top: 3px;
+                }
+                .time{
+                    width: 20%;
+                    font-size: .8rem;
+                    margin-top: 3px;
+                    color: $sub-text;
+                    bottom: 0;
+                    left: 0;
+                }
+            }
+            
+        }
+        .msg-input-div {
+            display: flex;
+            margin: 0.3em 0.8em;
+            height: 4%;
+            background-color: rgb(34, 34, 34);
+            border-radius: 25px;
+            align-items: center;
+            #message-input {
+                width: 90%;
+                outline: noun;
+                border: none;
+                background-color: transparent;
+                padding-left: 1em;
+                color: $main-text;
+                font-size: .8rem;
+                outline: none;
+            }
+        }
+    }
+    .empty-div {
+        display: flex;
+        width: 32%;
+        .last-section {
+            height: 100%;
+            width: 80%;
+        }
+        .right-side-space {
+            height: 100%;
+            width: 20%;
+        }
     }
 }
 // .mv-container {

@@ -10,34 +10,138 @@ async function fetchUserData(email) {
     console.log(error);
   }
 }
-
+let userData;
 // Function to update DOM elements with user data
 function updateDOMWithData(data) {
   const navProfile = document.getElementById("nav-profile");
   const navName = document.getElementById("nav-name");
   const nameTag = document.getElementById("nav-tag");
   const boxImage = document.getElementById("profile-tweetbox");
-  
+
   navProfile.src = `${data.user.profile_url}`;
   boxImage.src = `${data.user.profile_url}`;
   navName.innerText = `${data.user.user_name}`;
   nameTag.innerText = `@${data.user.user_name}`;
+  const socket = io("http://localhost:3000");
+
+  socket.on("connect", () => {
+    const userData = {
+      username: data.user.user_name,
+      profileUrl: data.user.profile_url,
+    };
+    socket.emit("joinChat", userData);
+  });
+
+  socket.on("updateUserList", (users) => {
+    populateOnlineUsers(users);
+  });
+
+  socket.on("receiveMessage", (messageData) => {
+    populateMessege(messageData);
+  });
+
+  function sendMessage() {
+    const receiverInput =
+      document.querySelector(".msg-box-heading").textContent;
+    const messageInput = document.getElementById("message-input");
+    const receiver = receiverInput;
+    const message = messageInput.value;
+    if (receiver !== "" && message !== "") {
+      socket.emit("sendMessage", { receiver, message });
+    }
+    messageInput.value = '';
+  }
+  document.getElementById("send").addEventListener("click", sendMessage);
+  function populateOnlineUsers(users) {
+    const usersContainer = document.querySelector(".users");
+    usersContainer.innerHTML = "";
+    users.forEach((user) => {
+      usersContainer.append(createUser(user));
+    });
+    console.log("online users", users);
+  }
+  function createUser(user) {
+    const userDiv = document.createElement("div");
+    userDiv.classList.add("user");
+    // Create image element
+    const img = document.createElement("img");
+    img.src = user.profileUrl;
+    img.alt = "";
+    // Create div element for username with class "name"
+    const nameDiv = document.createElement("div");
+    nameDiv.classList.add("name");
+    nameDiv.textContent = user.username;
+    // Create div element for tag with class "tag"
+    const tagDiv = document.createElement("div");
+    tagDiv.classList.add("tag");
+    tagDiv.textContent = `@${user.username}`;
+    // Append elements to the main div
+    userDiv.appendChild(img);
+    userDiv.appendChild(nameDiv);
+    userDiv.appendChild(tagDiv);
+
+    userDiv.addEventListener("click", (e) => {
+      const head = document.querySelector(".msg-box-heading");
+      head.innerText = user.username;
+      // empty messages cont
+      const messageBox = document.querySelector(".msg-container");
+      messageBox.innerHTML = "";
+      userDiv.style.backgroundColor = "rgb(34, 34, 34)";
+    });
+    return userDiv;
+  }
+  function populateMessege(messageData) {
+    const messageWrapper = createMessage(
+      messageData.message,
+      messageData.time,
+      messageData.left
+    );
+    const msgContainer = document.querySelector(".msg-container");
+    msgContainer.appendChild(messageWrapper);
+  }
+  function createMessage(messageText, time, left) {
+    // Create message wrapper div
+    const messageWrapper = document.createElement("div");
+    messageWrapper.classList.add("message-wrapper");
+
+    // Create message div
+    const messageDiv = document.createElement("div");
+    messageDiv.classList.add("message");
+    messageDiv.textContent = messageText;
+
+    // Create time div
+    const timeDiv = document.createElement("div");
+    timeDiv.classList.add("time");
+    timeDiv.textContent = time;
+
+    // Append message and time to the message wrapper
+    messageWrapper.appendChild(messageDiv);
+    messageWrapper.appendChild(timeDiv);
+    if (left === true) {
+      messageWrapper.style.alignSelf = "end";
+      messageDiv.style.borderRadius = "25px 25px 3px 25px";
+      messageDiv.style.backgroundColor = '#1a8cd8';
+      timeDiv.style.alignSelf = 'end';
+    }
+    return messageWrapper;
+  }
 }
-let userData;
 document.addEventListener("DOMContentLoaded", async () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const email = urlParams.get("email");
-
+  if (!email) {
+    alert("login first");
+    window.location = "./index.html";
+  }
   let data = await fetchUserData(email);
   console.log(data);
-  userData= data.user;
+  userData = data.user;
   setTimeout(() => {
     updateDOMWithData(data);
     renderPosts();
   }, 1000);
 });
-
 
 // media upload
 const mediaInput = document.querySelector("#media-input");
@@ -126,7 +230,6 @@ function createPostOnServer(postData) {
   });
 }
 
-
 // activate the post button
 const postInput = document.getElementById("post-input");
 postInput.addEventListener("input", () => {
@@ -139,7 +242,6 @@ postInput.addEventListener("input", () => {
     postButtton.style.color = "#797d7f";
   }
 });
-
 
 // can be modified
 let currentPageNumber = 1;
@@ -379,41 +481,19 @@ function widgetUpdates() {
     });
   });
 }
-
-
-
-// chat operations
-const socket = io('http://localhost:3000');
-
-    socket.on('connect', () => {
-      const userData = { /* User data */ }; // Provide user data when connecting
-      socket.emit('joinChat', userData);
-    });
-
-    socket.on('updateUserList', (users) => {
-      const userList = document.getElementById('userList');
-      userList.innerHTML = ''; // Clear existing user list
-      populateOnlineUsers(users);
-    });
-
-    socket.on('receiveMessage', (messageData) => {
-      populateMessege(messageData);
-    });
-
-    function sendMessage() {
-      const receiverInput = document.getElementById('receiverInput');
-      const messageInput = document.getElementById('messageInput');
-      const receiver = receiverInput.value.trim();
-      const message = messageInput.value.trim();
-      if (receiver !== '' && message !== '') {
-        socket.emit('sendMessage', { receiver, message });
-        messageInput.value = ''; 
-      }
-    }
-
-function populateOnlineUsers(users){
-  console.log(users);
+const container = document.querySelector(".container");
+const middleSection = document.querySelector(".middle-section");
+const lastSection = document.querySelector(".empty-div");
+const messagesDiv = document.querySelector(".messages");
+const messageBox = document.querySelector(".message-box");
+function onHome() {
+  container.replaceChild(middleSection, messagesDiv);
+  container.replaceChild(lastSection, messageBox);
 }
-function populateMessege(messageData){
-  console.log(messageData)
+
+function onMessages() {
+  container.replaceChild(messagesDiv, middleSection);
+  container.replaceChild(messageBox, lastSection);
+  messagesDiv.style.display = "block";
+  messageBox.style.display = "block";
 }
