@@ -9,7 +9,7 @@
   <body>
     <div class="container">
       <!-- only for mobail -->
-      <!-- <div class="add-post-mobail">
+      <div class="add-post-mobail">
         <div class="head-post-add">
           <div class="arrow-box">
             <img src="./twiiter base line images/icons/arrow.png" alt="arrow" />
@@ -30,19 +30,24 @@
             placeholder="What is happening?!"
             id="mobile-post-input"
           ></textarea>
+          <div class="mobile-media-input-display"></div>
         </div>
         <div class="everyone">
           <img src="./twiiter base line images/icons/globe.png" alt="" />
           <h4>Everyone can reply</h4>
         </div>
         <div class="icon-greed">
-          <img src="./twiiter base line images/icons/ic-1.png" alt="" />
+          <img
+            src="./twiiter base line images/icons/ic-1.png"
+            alt=""
+            onclick="addMedia()"
+          />
           <img src="./twiiter base line images/icons/ic-2.png" alt="" />
           <img src="./twiiter base line images/icons/ic-3.png" alt="" />
           <img src="./twiiter base line images/icons/ic-4.png" alt="" />
           <img src="./twiiter base line images/icons/ic-5.png" alt="" />
         </div>
-      </div> -->
+      </div>
       <!-- 1 -->
       <div class="left-side-space"></div>
       <!-- 2 -->
@@ -116,8 +121,17 @@
         </div>
       </div>
       <!-- only for mobail -->
-      <!-- <div class="navigation-section" id="navigation">
+      <div class="mobile-home">
         <div class="nav-head-wrapper">
+          <img
+            src="./twiiter base line images/Profile/profile pic.png"
+            alt=""
+            id="nav-entry"
+          />
+          <img src="./twiiter base line images/logo/twitter.png" alt="" />
+          <img src="./twiiter base line images/logo/setting.png.png" alt="" />
+        </div>
+        <div class="items">
           <div class="nav-head">
             <img
               src="./twiiter base line images/Profile/profile pic.png"
@@ -136,68 +150,66 @@
               <span>0 <span class="foloooow">Following</span></span>
             </div>
           </div>
-        </div>
-        <div class="items">
           <div class="item">
             <img
               src="./twiiter base line images/logo/mobeil/profile.png"
               alt=""
             />
-            <h2>Profile</h2>
+            <p>Profile</p>
           </div>
           <div class="item">
             <img
               src="./twiiter base line images/logo/mobeil/premium.png"
               alt=""
             />
-            <h2>Premium</h2>
+            <p>Premium</p>
           </div>
           <div class="item">
             <img src="./twiiter base line images/logo/mobeil/list.png" alt="" />
-            <h2>Lists</h2>
+            <p>Lists</p>
           </div>
           <div class="item">
             <img
               src="./twiiter base line images/logo/mobeil/bookmark.png"
               alt=""
             />
-            <h2>Bookmark</h2>
+            <p>Bookmark</p>
           </div>
           <div class="item">
             <img
               src="./twiiter base line images/logo/mobeil/community.png"
               alt=""
             />
-            <h2>Communities</h2>
+            <p>Communities</p>
           </div>
           <div class="item">
             <img src="./twiiter base line images/logo/mobeil/moni.png" alt="" />
-            <h2>Monetiztion</h2>
+            <p>Monetiztion</p>
           </div>
           <div class="item">
             <img src="./twiiter base line images/logo/mobeil/ads.png" alt="" />
-            <h2>Ads</h2>
+            <p>Ads</p>
           </div>
           <div class="item">
             <img
               src="./twiiter base line images/logo/mobeil/setting.png"
               alt=""
             />
-            <h2>Settings and privacy</h2>
+            <p>Settings and privacy</p>
           </div>
           <div class="item" id="logout">
             <img
               src="./twiiter base line images/logo/mobeil/logout.png"
               alt=""
             />
-            <h2>Logout</h2>
+            <p>Logout</p>
           </div>
-          <div class="border"></div>
         </div>
-      </div> -->
+      </div>
       <!-- 3 -->
       <!-- part of it -->
       <div class="middle-section">
+        <!-- desktop add post -->
         <div class="add-post-wrapper">
           <div class="profile">
             <img
@@ -250,156 +262,58 @@
             <button id="post-button">Post</button>
           </div>
         </div>
+        <!-- combined posts -->
         <div class="posts"></div>
+        <!-- mobile footer -->
+        <button class="add-post floating-tweet-box-icon">+</button>
       </div>
-      <div class="messages" style="display: none;">
+      <div class="footer">
+        <img
+          src="./twiiter base line images/logo/home.png"
+          alt="home"
+          onclick="onHomeMobile()"
+        />
+        <img src="./twiiter base line images/logo/search.png" alt="" />
+        <img src="./twiiter base line images/logo/grok.png" alt="" />
+        <img src="./twiiter base line images/logo/noti.png" alt="" />
+        <img
+          src="./twiiter base line images/logo/msg.png"
+          alt="messages"
+          onclick="onMessagesMobile()"
+        />
+      </div>
+      <div class="messages" style="display: none">
         <div class="title">Messages</div>
         <div class="users">
           <div class="user">
-            <img src="./twiiter base line images/Profile/p1.jpg" alt="">
+            <img src="./twiiter base line images/Profile/p1.jpg" alt="" />
             <div class="name" id="nav-name">Nitesh Gupta</div>
             <div class="tag" id="nav-tag">@nit_hck</div>
           </div>
         </div>
       </div>
-      <div class="message-box" style="display: none;">
-        <div class="msg-box-heading">
-          Khush Patel
-        </div>
-        <div class="msg-container">
-          <div class="message-wrapper">
-            <div class="message">
-              hey, how are you!
-            </div>
-            <div class="time">12:17</div>
-          </div>
-        </div>
+      <div class="message-box" style="display: none">
+        <div class="msg-box-heading"></div>
+        <div class="msg-container"></div>
         <div class="msg-input-div">
-          <input type="text" placeholder="start a new message" id="message-input">
-          <img src="./twiiter base line images/icons/send-dis.png" alt="" id="send">
-        </div>
-      </div>
-      <div class="empty-div">
-      <div class="last-section"></div>
-      <div class="right-side-space"></div>
-    </div>
-    </div>
-    <!-- <div class="mv-container">
-      <div class="add-post-mobail">
-        <div class="head-post-add">
-          <div class="arrow-box">
-            <img src="./twiiter base line images/icons/arrow.png" alt="arrow" />
-          </div>
-          <div class="post-button-box">
-            <h4 class="draft">Drafts</h4>
-            <button class="post-button" id="mobile-post-button">Post</button>
-          </div>
-        </div>
-        <div class="post-area-wrapper">
-          <img
-            id="image"
-            src="./twiiter base line images/Profile/profile pic.png"
-            alt=""
+          <input
+            type="text"
+            placeholder="start a new message"
+            id="message-input"
           />
-          <textarea
-            class="post-input"
-            placeholder="What is happening?!"
-            id="mobile-post-input"
-          ></textarea>
-        </div>
-        <div class="everyone">
-          <img src="./twiiter base line images/icons/globe.png" alt="" />
-          <h4>Everyone can reply</h4>
-        </div>
-        <div class="icon-greed">
-          <img src="./twiiter base line images/icons/ic-1.png" alt="" />
-          <img src="./twiiter base line images/icons/ic-2.png" alt="" />
-          <img src="./twiiter base line images/icons/ic-3.png" alt="" />
-          <img src="./twiiter base line images/icons/ic-4.png" alt="" />
-          <img src="./twiiter base line images/icons/ic-5.png" alt="" />
+          <img
+            src="./twiiter base line images/icons/send-dis.png"
+            alt=""
+            id="send"
+          />
         </div>
       </div>
-      <div class="navigation-section" id="navigation">
-        <div class="nav-head-wrapper">
-          <div class="nav-head">
-            <img
-              src="./twiiter base line images/Profile/profile pic.png"
-              alt=""
-              id="nav-exit"
-            />
-            <button>+</button>
-          </div>
-          <div class="name">Nitesh Gupta</div>
-          <div class="tag">@nit_hck</div>
-          <div class="follow-ing">
-            <div class="following">
-              <span>1 <span class="foloooow">Following</span></span>
-            </div>
-            <div class="follower">
-              <span>0 <span class="foloooow">Following</span></span>
-            </div>
-          </div>
-        </div>
-        <div class="items">
-          <div class="item">
-            <img
-              src="./twiiter base line images/logo/mobeil/profile.png"
-              alt=""
-            />
-            <h2>Profile</h2>
-          </div>
-          <div class="item">
-            <img
-              src="./twiiter base line images/logo/mobeil/premium.png"
-              alt=""
-            />
-            <h2>Premium</h2>
-          </div>
-          <div class="item">
-            <img src="./twiiter base line images/logo/mobeil/list.png" alt="" />
-            <h2>Lists</h2>
-          </div>
-          <div class="item">
-            <img
-              src="./twiiter base line images/logo/mobeil/bookmark.png"
-              alt=""
-            />
-            <h2>Bookmark</h2>
-          </div>
-          <div class="item">
-            <img
-              src="./twiiter base line images/logo/mobeil/community.png"
-              alt=""
-            />
-            <h2>Communities</h2>
-          </div>
-          <div class="item">
-            <img src="./twiiter base line images/logo/mobeil/moni.png" alt="" />
-            <h2>Monetiztion</h2>
-          </div>
-          <div class="item">
-            <img src="./twiiter base line images/logo/mobeil/ads.png" alt="" />
-            <h2>Ads</h2>
-          </div>
-          <div class="item">
-            <img
-              src="./twiiter base line images/logo/mobeil/setting.png"
-              alt=""
-            />
-            <h2>Settings and privacy</h2>
-          </div>
-          <div class="item" id="logout">
-            <img
-              src="./twiiter base line images/logo/mobeil/logout.png"
-              alt=""
-            />
-            <h2>Logout</h2>
-          </div>
-          <div class="border"></div>
-        </div>
+
+      <div class="empty-div">
+        <div class="last-section"></div>
+        <div class="right-side-space"></div>
       </div>
-      <button class="add-post floating-tweet-box-icon">+</button>
-    </div> -->
+    </div>
     <script
       src="https://cdn.socket.io/4.7.4/socket.io.min.js"
       integrity="sha384-Gr6Lu2Ajx28mzwyVR8CFkULdCU7kMlZ9UthllibdOSo6qAiN+yXNHqtgdTvFXMT4"

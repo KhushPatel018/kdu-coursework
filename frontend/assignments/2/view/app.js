@@ -10,20 +10,36 @@ async function fetchUserData(email) {
     console.log(error);
   }
 }
+
+// store that globally
 let userData;
+
 // Function to update DOM elements with user data
 function updateDOMWithData(data) {
   const navProfile = document.getElementById("nav-profile");
   const navName = document.getElementById("nav-name");
   const nameTag = document.getElementById("nav-tag");
   const boxImage = document.getElementById("profile-tweetbox");
-
+  const mobileNavProfileEntry = document.getElementById("nav-entry");
+  const mobileNavProfileExit = document.getElementById("nav-exit");
+  const mobileNavName = document.querySelector(".items").querySelector(".name");
+  const mobileNavTag = document.querySelector(".items").querySelector(".tag");
+  const addPro = document.getElementById("image");
   navProfile.src = `${data.user.profile_url}`;
   boxImage.src = `${data.user.profile_url}`;
+  addPro.src = `${data.user.profile_url}`;
+  mobileNavProfileEntry.src = `${data.user.profile_url}`;
+  mobileNavProfileExit.src = `${data.user.profile_url}`;
   navName.innerText = `${data.user.user_name}`;
   nameTag.innerText = `@${data.user.user_name}`;
+  mobileNavName.innerText = `${data.user.user_name}`;
+  mobileNavTag.innerText = `@${data.user.user_name}`;
+
+  // socket logic on document load
+
   const socket = io("http://localhost:3000");
 
+  // handling connection
   socket.on("connect", () => {
     const userData = {
       username: data.user.user_name,
@@ -32,14 +48,16 @@ function updateDOMWithData(data) {
     socket.emit("joinChat", userData);
   });
 
+  // online user update
   socket.on("updateUserList", (users) => {
     populateOnlineUsers(users);
   });
 
+  // message recieving
   socket.on("receiveMessage", (messageData) => {
     populateMessege(messageData);
   });
-
+  // emit the message
   function sendMessage() {
     const receiverInput =
       document.querySelector(".msg-box-heading").textContent;
@@ -49,9 +67,12 @@ function updateDOMWithData(data) {
     if (receiver !== "" && message !== "") {
       socket.emit("sendMessage", { receiver, message });
     }
-    messageInput.value = '';
+    messageInput.value = "";
   }
+  // send listner
   document.getElementById("send").addEventListener("click", sendMessage);
+
+  // add users to dom
   function populateOnlineUsers(users) {
     const usersContainer = document.querySelector(".users");
     usersContainer.innerHTML = "";
@@ -60,6 +81,8 @@ function updateDOMWithData(data) {
     });
     console.log("online users", users);
   }
+
+  // creates a user div
   function createUser(user) {
     const userDiv = document.createElement("div");
     userDiv.classList.add("user");
@@ -80,6 +103,7 @@ function updateDOMWithData(data) {
     userDiv.appendChild(nameDiv);
     userDiv.appendChild(tagDiv);
 
+    // on click on perticuler user
     userDiv.addEventListener("click", (e) => {
       const head = document.querySelector(".msg-box-heading");
       head.innerText = user.username;
@@ -87,9 +111,15 @@ function updateDOMWithData(data) {
       const messageBox = document.querySelector(".msg-container");
       messageBox.innerHTML = "";
       userDiv.style.backgroundColor = "rgb(34, 34, 34)";
+      if (window.innerWidth < 500) {
+        messagesDiv.style.display = "none";
+        document.querySelector(".footer").style.display = "none";
+        document.querySelector(".message-box").style.display = "block";
+      }
     });
     return userDiv;
   }
+  // add message to dom
   function populateMessege(messageData) {
     const messageWrapper = createMessage(
       messageData.message,
@@ -99,6 +129,8 @@ function updateDOMWithData(data) {
     const msgContainer = document.querySelector(".msg-container");
     msgContainer.appendChild(messageWrapper);
   }
+
+  // create the message
   function createMessage(messageText, time, left) {
     // Create message wrapper div
     const messageWrapper = document.createElement("div");
@@ -120,12 +152,14 @@ function updateDOMWithData(data) {
     if (left === true) {
       messageWrapper.style.alignSelf = "end";
       messageDiv.style.borderRadius = "25px 25px 3px 25px";
-      messageDiv.style.backgroundColor = '#1a8cd8';
-      timeDiv.style.alignSelf = 'end';
+      messageDiv.style.backgroundColor = "#1a8cd8";
+      timeDiv.style.alignSelf = "end";
     }
     return messageWrapper;
   }
 }
+
+// render post
 document.addEventListener("DOMContentLoaded", async () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -146,6 +180,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 // media upload
 const mediaInput = document.querySelector("#media-input");
 const mediaInputDisplay = document.querySelector(".media-input-display");
+const mobailMediaInputDisplay = document.querySelector(".media-input-display");
 const addMedia = () => {
   mediaInput.click();
   mediaInput.addEventListener("change", (e) => {
@@ -155,6 +190,20 @@ const addMedia = () => {
     let video = document.createElement("video");
     video.controls = true;
     fileReader.onload = (e) => {
+      // mobile work flow
+      if (window.innerWidth < 500) {
+        if (e.target.result.substring(0, 10) === "data:image") {
+          image.src = e.target.result;
+          mobailMediaInputDisplay.innerHTML = "";
+          mobailMediaInputDisplay.appendChild(image);
+        } else if (e.target.result.substring(0, 10) === "data:video") {
+          video.src = e.target.result;
+          mobailMediaInputDisplay.innerHTML = "";
+          mobailMediaInputDisplay.appendChild(video);
+        }
+        return;
+      }
+      // desktop work flow
       if (e.target.result.substring(0, 10) === "data:image") {
         image.src = e.target.result;
         mediaInputDisplay.innerHTML = "";
@@ -169,6 +218,7 @@ const addMedia = () => {
   });
 };
 
+// utility
 function highlightHashtags(text) {
   return text.replace(/#\w+/g, '<span style="color: blue;">$&</span>');
 }
@@ -207,12 +257,52 @@ document.getElementById("post-button").addEventListener("click", () => {
   mediaInputDisplay.innerHTML = "";
   window.location.reload();
 });
+// add local user's post through post box
+document.getElementById("mobile-post-button").addEventListener("click", () => {
+  const content = mobilePostInput.value.trim();
+  const imageUrl = getMediaUrlMobile("IMG");
+  const videoUrl = getMediaUrlMobile("VIDEO");
 
+  if (!content && !imageUrl && !videoUrl) {
+    alert("Please enter some content or attach an image/video.");
+    return;
+  }
+
+  const postData = {
+    createdBy: userData.user_name,
+    content: content,
+    profileUrl: userData.profile_url,
+    imageUrl: imageUrl,
+    videoUrl: videoUrl,
+  };
+
+  createPostOnServer(postData)
+    .then((responseData) => {
+      console.log("Post created successfully:", responseData);
+      // Refresh posts after successfully adding a new one
+      renderPosts();
+    })
+    .catch((error) => {
+      console.error("Error creating post:", error);
+    });
+
+  // Clear input fields after posting
+  mobilePostInput.value = "";
+  mediaInputDisplay.innerHTML = "";
+  window.location.reload();
+});
+
+// utility
 function getMediaUrl(tagName) {
   const firstChild = mediaInputDisplay.firstChild;
   return firstChild && firstChild.nodeName === tagName ? firstChild.src : "";
 }
+function getMediaUrlMobile(tagName) {
+  const firstChild = mobailMediaInputDisplay.firstChild;
+  return firstChild && firstChild.nodeName === tagName ? firstChild.src : "";
+}
 
+// create post using api request
 function createPostOnServer(postData) {
   const options = {
     method: "POST",
@@ -232,6 +322,9 @@ function createPostOnServer(postData) {
 
 // activate the post button
 const postInput = document.getElementById("post-input");
+const mobilePostInput = document.getElementById("mobile-post-input");
+
+// enable disable button
 postInput.addEventListener("input", () => {
   const postButtton = document.getElementById("post-button");
   if (postInput.value !== "") {
@@ -243,9 +336,21 @@ postInput.addEventListener("input", () => {
   }
 });
 
+mobilePostInput.addEventListener("input", () => {
+  const mobilePostButton = document.getElementById("mobile-post-button");
+  if (mobilePostInput.value !== "") {
+    mobilePostButton.style.backgroundColor = "#1a8cd8";
+    mobilePostButton.style.color = "#e7e9ea";
+  } else {
+    mobilePostButton.style.backgroundColor = "#0f4e78";
+    mobilePostButton.style.color = "#797d7f";
+  }
+});
+
 // can be modified
 let currentPageNumber = 1;
 
+// renders the post on screen
 function renderPosts() {
   // Fetch posts from the backend using paginated API
   fetchPosts(currentPageNumber, 5)
@@ -432,6 +537,7 @@ function createWidgetContainer(
   return containerDiv;
 }
 
+// like updates and other widget handler
 function widgetUpdates() {
   const newPostContainer = document.querySelector(".posts");
   console.log(newPostContainer.childNodes);
@@ -481,6 +587,8 @@ function widgetUpdates() {
     });
   });
 }
+
+// naviagtion logic of messages
 const container = document.querySelector(".container");
 const middleSection = document.querySelector(".middle-section");
 const lastSection = document.querySelector(".empty-div");
@@ -490,6 +598,13 @@ function onHome() {
   container.replaceChild(middleSection, messagesDiv);
   container.replaceChild(lastSection, messageBox);
 }
+function onHomeMobile() {
+  container.replaceChild(middleSection, messagesDiv);
+}
+function onMessagesMobile() {
+  container.replaceChild(messagesDiv, middleSection);
+  messagesDiv.style.display = "block";
+}
 
 function onMessages() {
   container.replaceChild(messagesDiv, middleSection);
@@ -497,3 +612,20 @@ function onMessages() {
   messagesDiv.style.display = "block";
   messageBox.style.display = "block";
 }
+
+const mobileNav = document.querySelector(".items");
+document.getElementById("nav-entry").addEventListener("click", () => {
+  mobileNav.style.display = "block";
+});
+document.getElementById("nav-exit").addEventListener("click", () => {
+  console.log("clicked");
+  mobileNav.style.display = "none";
+});
+document
+  .querySelector(".floating-tweet-box-icon")
+  .addEventListener("click", () => {
+    document.querySelector(".add-post-mobail").style.display = "block";
+  });
+document.querySelector(".arrow-box").addEventListener("click", () => {
+  document.querySelector(".add-post-mobail").style.display = "none";
+});
