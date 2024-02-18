@@ -1,0 +1,101 @@
+*::after,
+*::before,
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+}
+
+@font-face {
+  font-family: TwitterChirpExtendedHeavy;
+  src: url(https://abs.twimg.com/fonts/v1/chirp-extended-heavy-web.woff2) format("woff2");
+  src: url(https://abs.twimg.com/fonts/v1/chirp-extended-heavy-web.woff) format("woff");
+  font-weight: 800;
+  font-style: "normal";
+  font-display: "swap";
+}
+@font-face {
+  font-family: TwitterChirp;
+  src: url(https://abs.twimg.com/fonts/v2/chirp-regular-web.woff2) format("woff2");
+  src: url(https://abs.twimg.com/fonts/v2/chirp-regular-web.woff) format("woff");
+  font-weight: 400;
+  font-style: "normal";
+  font-display: "swap";
+}
+@font-face {
+  font-family: TwitterChirp;
+  src: url(https://abs.twimg.com/fonts/v2/chirp-medium-web.woff2) format("woff2");
+  src: url(https://abs.twimg.com/fonts/v2/chirp-medium-web.woff) format("woff");
+  font-weight: 500;
+  font-style: "normal";
+  font-display: "swap";
+}
+@font-face {
+  font-family: TwitterChirp;
+  src: url(https://abs.twimg.com/fonts/v2/chirp-bold-web.woff2) format("woff2");
+  src: url(https://abs.twimg.com/fonts/v2/chirp-bold-web.woff) format("woff");
+  font-weight: 700;
+  font-style: "normal";
+  font-display: "swap";
+}
+@font-face {
+  font-family: TwitterChirp;
+  src: url(https://abs.twimg.com/fonts/v2/chirp-heavy-web.woff2) format("woff2");
+  src: url(https://abs.twimg.com/fonts/v2/chirp-heavy-web.woff) format("woff");
+  font-weight: 800;
+  font-style: "normal";
+  font-display: "swap";
+}
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: TwitterChirp, sans-serif;
+  row-gap: 1em;
+}
+.container .heading {
+  font-size: 3rem;
+  color: #e7e9ea;
+}
+.container .heading img {
+  height: 80%;
+}
+.container #username,
+.container #password {
+  height: 6vh;
+  width: max(23%, 310px);
+  border: 2px solid #1a8cd8;
+  border-radius: 3%;
+  color: #e7e9ea;
+  outline: none;
+  padding: 1em;
+  font-weight: 400;
+}
+.container #username::-moz-placeholder, .container #password::-moz-placeholder {
+  color: #e7e9ea;
+}
+.container #username::placeholder,
+.container #password::placeholder {
+  color: #e7e9ea;
+}
+.container #error {
+  display: none;
+  font-size: 0.8rem;
+  color: red;
+  text-wrap: wrap;
+  text-align: center;
+}
+.container button {
+  width: max(23%, 310px);
+  height: 5vh;
+  border-radius: 25px;
+  border: none;
+  background-color: #1a8cd8;
+  color: #e7e9ea;
+  font-weight: 600;
+  cursor: pointer;
+}/*# sourceMappingURL=login.css.map */

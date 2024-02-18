@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>X</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- 1 -->
+      <div class="left-side-space"></div>
+      <!-- 2 -->
+      <div class="navigation-section">
+        <div class="logo-container">
+          <img src="./twiiter base line images/logo/twitter.png" alt="" />
+        </div>
+        <div class="nav-item">
+          <img src="./twiiter base line images/logo/home.png" alt="" />
+          <p>Home</p>
+        </div>
+        <div class="nav-item">
+          <img src="./twiiter base line images/logo/search.png" alt="" />
+          <p>Explore</p>
+        </div>
+        <div class="nav-item">
+          <img src="./twiiter base line images/logo/noti.png" alt="" />
+          <p>Notification</p>
+        </div>
+        <div class="nav-item">
+          <img src="./twiiter base line images/logo/msg.png" alt="" />
+          <p>Messages</p>
+        </div>
+        <div class="nav-item">
+          <img src="./twiiter base line images/logo/grok.png" alt="" />
+          <p>Grok</p>
+        </div>
+        <div class="nav-item">
+          <img src="./twiiter base line images/logo/lists.png" alt="" />
+          <p>Lists</p>
+        </div>
+        <div class="nav-item">
+          <img
+            src="./twiiter base line images/logo/bookmark.png"
+            alt="bookmark"
+          />
+          <p>Bookmark</p>
+        </div>
+        <div class="nav-item">
+          <img src="./twiiter base line images/logo/community.png" alt="" />
+          <p>Communities</p>
+        </div>
+        <div class="nav-item">
+          <img src="./twiiter base line images/logo/twitter.png" alt="" />
+          <p>Premium</p>
+        </div>
+        <div class="nav-item">
+          <img src="./twiiter base line images/logo/profile.png" alt="" />
+          <p>Profile</p>
+        </div>
+        <div class="nav-item">
+          <img src="./twiiter base line images/logo/more.png" alt="" />
+          <p>More</p>
+        </div>
+        <div class="post-button">
+          <button>Post</button>
+        </div>
+        <div class="profile">
+          <div class="profile-icon">
+            <img
+              src="./twiiter base line images/Profile/profile pic.png"
+              alt=""
+              id="nav-profile"
+            />
+          </div>
+          <div class="profile-info">
+            <div class="name" id="nav-name">Nitesh Gupta</div>
+            <div class="tag" id="nav-tag">@nit_hck</div>
+          </div>
+          <div class="three-dots">...</div>
+        </div>
+      </div>
+      <!-- 3 -->
+      <!-- part of it -->
+      <div class="middle-section">
+        <div class="add-post-wrapper">
+          <div class="profile">
+            <img
+              src="./twiiter base line images/Profile/profile pic.png"
+              alt=""
+              id="profile-tweetbox"
+            />
+          </div>
+          <div class="box">
+            <input
+              type="text"
+              placeholder="What is happening?"
+              id="post-input"
+            />
+            <input
+              id="media-input"
+              type="file"
+              style="display: none"
+              accept="image/*"
+            />
+            <div class="media-input-display"></div>
+            <div class="icon-grid">
+              <img
+                src="./twiiter base line images/icons/ic-1.png"
+                alt="add image"
+                class="icon"
+                onclick="addMedia()"
+              />
+              <img
+                src="./twiiter base line images/icons/ic-2.png"
+                alt="add gif"
+                class="icon"
+              />
+              <img
+                src="./twiiter base line images/icons/ic-3.png"
+                alt="add bullet"
+                class="icon"
+              />
+              <img
+                src="./twiiter base line images/icons/ic-4.png"
+                alt="schedule"
+                class="icon"
+              />
+              <img
+                src="./twiiter base line images/icons/ic-5.png"
+                alt="add location"
+                class="icon"
+              />
+            </div>
+            <button id="post-button">Post</button>
+          </div>
+        </div>
+        <div class="posts"></div>
+      </div>
+      <div class="last-section"></div>
+      <div class="right-side-space"></div>
+    </div>
+    <script
+      src="https://cdn.socket.io/4.7.4/socket.io.min.js"
+      integrity="sha384-Gr6Lu2Ajx28mzwyVR8CFkULdCU7kMlZ9UthllibdOSo6qAiN+yXNHqtgdTvFXMT4"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../app.js"></script>
+  </body>
+</html>
