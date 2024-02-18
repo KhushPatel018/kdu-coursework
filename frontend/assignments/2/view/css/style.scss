@@ -441,6 +441,7 @@ $main-text: #e7e9ea;
             display: none;
         }
         .floating-tweet-box-icon {
+            display: none;
             position: fixed;
             right: 24px;
             bottom: 90px;
@@ -684,6 +685,9 @@ $main-text: #e7e9ea;
             }
             .posts {
                 width: 96%;
+            }
+            .floating-tweet-box-icon{
+                display: block;
             }
         }
         .footer {
