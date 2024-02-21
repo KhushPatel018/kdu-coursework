@@ -4,7 +4,6 @@ import { QuoteType } from "../../types";
 import "./Main.scss";
 import { FiltersSection } from "../utility/FiltersSection";
 import { AddQuoteButton } from "../utility/AddQuoteButton";
-
 /**
  * Main component for displaying quotes and handling filters.
  */
@@ -12,7 +11,6 @@ export const Main = () => {
   const [quotes, setQuotes] = useState<QuoteType[]>([]);
   const [filters, setFilters] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
-
   // Fetch quotes from API when component mounts
   useEffect(() => {
     const fetchQuotes = async () => {
@@ -36,6 +34,7 @@ export const Main = () => {
 
   // Filter quotes when filters change
   useEffect(() => {
+    console.log("filter changed: ", filters);
     const filterQuotes = () => {
       if (filters.length === 0) {
         const updatedList = quotes.map((qt) => ({
@@ -44,15 +43,21 @@ export const Main = () => {
         }));
         setQuotes(updatedList);
       } else {
-        const updatedList = quotes.map((qt: QuoteType) => ({
-          ...qt,
-          isVisible: filters.some((filtr) => qt.tags.includes(filtr)),
-        }));
-        setQuotes(updatedList);
+        filters.forEach((filtr) => {
+          const updatedList = [...quotes];
+          updatedList.map((qt: QuoteType) => {
+            if (qt.tags.includes(filtr)) {
+              qt.isVisible = true;
+            } else {
+              qt.isVisible = false;
+            }
+          });
+          setQuotes(updatedList);
+        });
       }
     };
     filterQuotes();
-  }, [filters, quotes]);
+  }, [filters]);
 
   // Handle adding a new quote
   const addQuoteClickHandler = async () => {
@@ -81,11 +86,12 @@ export const Main = () => {
   };
 
   // Handle adding a filter
-  const addFilterClickHandler: React.MouseEventHandler<HTMLButtonElement> = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const addFilterClickHandler:
+    | React.MouseEventHandler<HTMLButtonElement>
+    | undefined = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const filter = (e.target as HTMLButtonElement).innerText;
-    if (!filters.includes(filter)) setFilters((prevFilters) => [...prevFilters, filter]);
+    if (!filters.includes(filter))
+      setFilters((prevFilters) => [...prevFilters, filter]);
   };
 
   // Handle removing a filter
@@ -97,10 +103,8 @@ export const Main = () => {
     <div className="container">
       {/* AddQuoteButton component */}
       <AddQuoteButton onClick={addQuoteClickHandler} loading={loading} />
-
       {/* FiltersSection component */}
       <FiltersSection onRemoveFilter={removeFilterHandler} filters={filters} />
-
       {/* QuoteList component */}
       <div className="quote-container">
         <QuoteList quotes={quotes} onClick={addFilterClickHandler} />
