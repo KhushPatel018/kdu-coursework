@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Home from "./Components/Home";
 import FullScreenProduct from "./Components/FullScreenProduct";
 import NotFound from "./Components/NotFound";
 import { IProduct } from "./types";

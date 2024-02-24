@@ -2,8 +2,10 @@ import { CSSProperties } from "react";
 
 const quoteBg = "#0c359e";
 const mainBg = "#f6f5f5";
-
-const styles: { [key: string]: CSSProperties } = {
+interface MediaQueries {
+  [key: string]: { [key: string]: CSSProperties };
+}
+const styles: { [key: string]: CSSProperties | MediaQueries } = {
   "*": {
     boxSizing: "border-box",
   },
@@ -13,29 +15,36 @@ const styles: { [key: string]: CSSProperties } = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
     backgroundColor: mainBg,
   },
   title: {
     fontSize: "max(3.5vw,25px)", // Default font size
     color: quoteBg,
     fontWeight: 500,
+    padding : "1em",
   },
   detailWrapper: {
     display: "flex",
+    flexDirection : "row",
+    gap : "1em"
+  },
+  image : {
+    width : "40%",
+    display : "flex",
   },
   productImage: {
     display:"block",
-
-    height: "65vh",
-    maxWidth : "50%",
+    width : "100%",
+    objectPosition : "centre",
+    maxWidth : "500px",
+    minWidth : "200px",
+    maxHeight : "450px", 
     mixBlendMode: "multiply",
   },
   details: {
     width: "50%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
     gap: "12px",
   },
   model: {
@@ -69,18 +78,13 @@ const styles: { [key: string]: CSSProperties } = {
     border: "1px solid rgb(21, 151, 244)",
     borderRadius: "6px",
   },
-};
+  "@media (max-width: 520px)": {
+    detailWrapper: { // Styles specific to screens with a maximum width of 520px
+      flexDirection: "column",
+      color : "red",
+    }
+  } as MediaQueries
+}
 
-// Define media query separately
-const mediaQuery = {
-  "@media (min-width: 800px)": {
-    title: {
-      fontSize: "2.5rem", // Font size for larger screens
-    },
-  },
-};
-
-// Merge media query with styles
-Object.assign(styles, mediaQuery);
 
 export { styles };

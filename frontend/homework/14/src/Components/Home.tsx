@@ -1,24 +1,42 @@
 import { useProducts, useSetProducts } from "./context";
-import Product from "./Product";
 import { styles } from "./css/Home.style";
-import { FaSearch } from "react-icons/fa";
 import { FilterBy } from "./FilterBy";
 import { SortBy } from "./SortBy";
 import { useEffect, useRef, useState } from "react";
 import { IProduct } from "../types";
-import { useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import queryString from "query-string";
+import { SearchInput } from "./SearchInput";
+import ProductList from "./ProductList";
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const products = useProducts();
   const setProducts = useSetProducts();
-  const [searchParams] = useSearchParams();
   const [filter, setFilter] = useState<string>("All Products");
+  const location = useLocation();
+  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
+
   useEffect(() => {
-    if (searchParams.get("filter")) {
-      setFilter(searchParams.get("filter")!);
+    const queryParams = queryString.parse(location.search);
+
+    const filterValue = queryParams.filter as string | undefined;
+
+    if (filterValue) {
+      setFilter(filterValue);
     }
-  });
+  }, [location.search]);
+  useEffect(() => {
+    const filtered = products.filter(
+      (product) => filter === "All Products" || product.category === filter
+    );
+    setFilteredProducts(filtered);
+  }, [filter, products]);
+
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilter(e.target.value);
+  };
+
   useEffect(() => {
     const newList = [...products];
     if (searchTerm === "") {
@@ -35,21 +53,6 @@ export default function Home() {
       });
     }
   }, [searchTerm]);
-
-  useEffect(() => {
-    setProducts((prevProducts) => {
-      const updatedList = prevProducts.map((card) => ({
-        ...card,
-        isVisible: filter === "All Products" || card.category === filter,
-      }));
-      return updatedList;
-    });
-  }, [filter]);
-
-  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFilter(e.target.value);
-  };
-
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const sortType = e.target.value;
     const sortedList = [...products];
@@ -64,49 +67,14 @@ export default function Home() {
     if (inputRef.current) setSearchTerm(inputRef.current.value);
   };
 
-  const noValidItem = (): boolean => {
-    return products.every((item) => !item.isVisible);
-  };
-
-  let contentToRender;
-  if (products.length === 0) {
-    contentToRender = (
-      <p className="no-items" style={styles.noItems}>
-        No items to show!
-      </p>
-    );
-  } else if (noValidItem()) {
-    contentToRender = (
-      <p className="no-items" style={styles.noItems}>
-        No Match Found!
-      </p>
-    );
-  } else {
-    contentToRender = products.map((item: IProduct) =>
-      item.isVisible ? <Product key={item.id} {...item} /> : null
-    );
-  }
-
   return (
     <div className="container" style={styles.container}>
       <header className="header" style={styles.header}>
-        <div className="search-wrapper" style={styles.searchWrapper}>
-          <input
-            ref={inputRef}
-            type="text"
-            placeholder="Search..."
-            className="search-input"
-            onChange={(e) => setSearchTerm(e.target.value)}
-            style={styles.searchInput}
-          />
-          <button
-            className="search"
-            onClick={handleSearch}
-            style={styles.search}
-          >
-            <FaSearch />
-          </button>
-        </div>
+        <SearchInput
+          inputRef={inputRef}
+          searchTerm={searchTerm}
+          onSearch={handleSearch}
+        />
         <div className="wrapper" style={styles.wrapper}>
           <FilterBy filter={filter} onChange={handleFilterChange} />
           <SortBy onChange={handleSortChange} />
@@ -118,9 +86,7 @@ export default function Home() {
           MARKETPLACE
         </span>
       </div>
-      <div className="products" style={styles.products}>
-        {contentToRender}
-      </div>
+      <ProductList products={filteredProducts} />
     </div>
   );
 }

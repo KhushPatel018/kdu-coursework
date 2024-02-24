@@ -10,12 +10,14 @@ export default function FullScreenProduct() {
         {product?.title}
       </h1>
       <div className="detail-wrapper" style={styles.detailWrapper}>
+        <div className="image" style={styles.image}>
         <img
           src={product?.image}
           alt="productImage"
           className="product-image"
           style={styles.productImage}
-        />
+          />
+        </div>
         <div className="details" style={styles.details}>
           <div className="model" style={styles.model}>
             Model : {product?.title}

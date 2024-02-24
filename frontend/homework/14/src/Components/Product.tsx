@@ -1,5 +1,5 @@
 import { IProduct } from "../types";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import styles from "./css/Product.style";
 export default function Product({
   id,
