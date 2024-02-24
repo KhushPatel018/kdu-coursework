@@ -1,0 +1,66 @@
+$quote-bg: #0c359e;
+$tag-bg: #ee99c2;
+$button-bg: #ffe3ca;
+$main-bg: #f6f5f5;
+.container{
+    box-sizing: border-box;
+    width : 100vw;
+    display: flex;
+    flex-direction: column;
+    .header{
+        display: flex;
+        align-items: center;
+        height: 5vh;
+        width: 100%;
+        background-color: $quote-bg;
+        padding: .5em 2em;
+        gap: 4px;
+        .search-input{
+            height: 40%;
+            width: 30%;
+            padding: 0.3em 1em;
+            outline: none;
+            border: none;
+            border-radius: 25px;
+        }
+        .search{
+            height: 60%;
+            width: 2.3%;
+            cursor: pointer;
+            border: none;
+            border-radius: 60px;
+        }
+    }
+    .products-container{
+        background-color:$main-bg;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        align-items: center;
+        width: 95%;
+        margin: auto;
+        .title{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height : 3vh;
+            width: 100%;
+            padding: 1em;
+            gap : 1em;
+            font-weight: 700;
+            .kdu{
+                font-size: 2rem;
+            }
+            .marketplace{
+                color: #0c359e;
+                font-size: 2rem;
+            }
+        }
+        .products{
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            row-gap: 1em;
+        }
+    }
+}
