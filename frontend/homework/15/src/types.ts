@@ -2,6 +2,7 @@ export type ListItemType = {
     id: string;
     content: string;
     isValid : boolean;
+    isDone : boolean;
 }
 export type ItemContentType = {
     content: string;

@@ -6,6 +6,7 @@
     border-bottom: none;
     .content {
         font-size: 1rem;
+        text-align: center;
     }
     .remove {
         background-color: red;
@@ -17,6 +18,6 @@
         font-weight: 600;
     }
 }
-.item:nth-last-child(2) {
+.item:nth-last-child(3) {
     border-bottom: 1px solid #808080;
 }

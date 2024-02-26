@@ -55,6 +55,17 @@
             font-weight: 600;
             color: rgb(208, 103, 62);
         }
+        .clearTheComplete{
+            padding: 0.5em 0.8em;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 3px;
+            width: 35%;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
     }
     .list-container::-webkit-scrollbar {
         display: none;

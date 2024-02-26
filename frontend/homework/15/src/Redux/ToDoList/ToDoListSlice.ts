@@ -12,6 +12,7 @@ const ToDoListSlice = createSlice({
         id: (state.length + 1).toString(),
         content: action.payload.content,
         isValid: true,
+        isDone : false
       });
     },
     deleteItem: (state, action: PayloadAction<ItemIdType>) => {
@@ -25,6 +26,7 @@ const ToDoListSlice = createSlice({
       if (index !== -1) {
         state[index].content = action.payload.content;
         state[index].isValid = action.payload.isValid;
+        state[index].isDone = action.payload.isDone;
       }
     },
   },
