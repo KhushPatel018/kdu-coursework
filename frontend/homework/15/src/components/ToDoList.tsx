@@ -1,10 +1,6 @@
-import React from 'react';
 import { Header } from './Header';
 import { List } from './List';
 import './css/ToDoList.scss';
-..
-
-
 export const ToDoList = () => {
   return (
     <div className='container'>

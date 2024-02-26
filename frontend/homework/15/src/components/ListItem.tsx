@@ -1,13 +1,12 @@
-import React from "react";
 import "./css/ListItem.scss";
-import { useContent, useSetList,useId } from "../context";
+import { ListItemPropsType } from "../types";
+import { useDispatch } from "react-redux";
+import { deleteItem } from "../Redux/ToDoList/ToDoListSlice";
 
-export const ListItem = () => {
-  const setter = useSetList();
-  const id = useId();
-  const content = useContent();
+export const ListItem = ({ id, content }: ListItemPropsType) => {
+  const dispatch = useDispatch();
   const removeItem = () => {
-    setter((prev) => [...prev.filter((item) => item.id !== id)]);
+    dispatch(deleteItem({ id }));
   };
   return (
     <div className="item">

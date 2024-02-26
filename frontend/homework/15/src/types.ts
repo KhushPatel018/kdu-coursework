@@ -3,16 +3,13 @@ export type ListItemType = {
     content: string;
     isValid : boolean;
 }
+export type ItemContentType = {
+    content: string;
+}
+export type ItemIdType = {
+    id: string;
+}
 export type ListItemPropsType = {
     content: string;
     id: string;
 }
-export type ListPropsType = {
-    list : ListItemType[];
-    setter : React.Dispatch<React.SetStateAction<ListItemType[]>>
-}
-
-export type contextType = {
-    list: ListItemType[] | undefined;
-    setList: React.Dispatch<React.SetStateAction<ListItemType[]>> | undefined;
-  }

@@ -1,30 +1,36 @@
-import React, { useState } from "react";
+import  { useEffect, useRef, useState } from "react";
 import { ListItem } from "./ListItem";
 import "./css/List.scss";
-import { ListItemType } from "../types";
-import { ContentContext, IdContext, useList, useSetList } from "../context";
+import { ItemContentType, ListItemType } from "../types";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../Redux/store";
+import { addItem } from "../Redux/ToDoList/ToDoListSlice";
 
 export const List = () => {
   const [content, setContent] = useState("");
-  const list = useList();
-  const setter = useSetList();
+  const list = useSelector((state: RootState) => state.ToDoList);
+  const dispatch = useDispatch();
+  const listEndRef = useRef<HTMLDivElement>(null);
   const handleAddItem = () => {
     if (content.trim() === "") {
       alert("Add some content to add item");
       return;
     }
-    const listItem: ListItemType = {
-      id: `${list.length + 1}`,
+    const listItem: ItemContentType = {
       content: content,
-      isValid: true,
     };
-    setter((prevValues) => [...prevValues, listItem]);
+    dispatch(addItem(listItem));
     setContent("");
   };
 
   const noValidItem = (): boolean => {
     return list.every((item) => !item.isValid);
   };
+
+  useEffect(() => {
+    // Scroll to the end of the list when a new item is added
+    listEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [list]);
 
   let contentToRender;
   if (list.length === 0) {
@@ -33,13 +39,7 @@ export const List = () => {
     contentToRender = <p className="no-items">No Match Found!</p>;
   } else {
     contentToRender = list.map((item: ListItemType) =>
-      item.isValid ? (
-        <IdContext.Provider value={item.id} key={item.id}>
-          <ContentContext.Provider value={item.content}>
-            <ListItem />
-          </ContentContext.Provider>
-        </IdContext.Provider>
-      ) : null
+      item.isValid ? <ListItem  key={item.id} id={item.id} content={item.content} /> : null
     );
   }
 
@@ -62,6 +62,7 @@ export const List = () => {
       <div className="list-container">
         <div className="item-title">Items</div>
         {contentToRender}
+        <div ref={listEndRef} />
       </div>
     </div>
   );

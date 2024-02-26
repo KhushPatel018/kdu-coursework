@@ -1,26 +1,24 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./css/Header.scss";
-import { useList, useSetList } from "../context";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../Redux/store";
+import { updateItem } from "../Redux/ToDoList/ToDoListSlice";
 
 export const Header = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const list = useList();
-  const setter = useSetList();
+  const list = useSelector((state: RootState) => state.ToDoList);
+  const dispatch = useDispatch();
   useEffect(() => {
-    const newList = [...list];
     if (searchTerm === "") {
-      newList.forEach((item) => (item.isValid = true));
-      setter(newList);
+      list.forEach((item) => dispatch(updateItem({ ...item, isValid: true })));
     } else {
-      newList.forEach((item) => {
+      list.forEach((item) => {
         if (!item.content.toLowerCase().includes(searchTerm.toLowerCase())) {
-          item.isValid = false;
+          dispatch(updateItem({ ...item, isValid: false }));
         } else {
-          item.isValid = true;
+          dispatch(updateItem({ ...item, isValid: true }));
         }
-        setter(newList);
       });
-      console.log("header list: ", list);
     }
   }, [searchTerm]);
 
