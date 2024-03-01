@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useAppSelector } from "../Redux/store";
-import { Room, RoomType } from "../types";
-import styled from "styled-components";
-import dayjs, { Dayjs } from "dayjs";
+import { RoomType } from "../types";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -13,14 +11,12 @@ import { Container } from "./Home.styled";
 
 export function Home() {
   const rooms = useAppSelector((state) => state.Rooms.rooms);
-  const loading = useAppSelector((state) => state.Rooms.loading);
-  const error = useAppSelector((state) => state.Rooms.error);
 
   const [active, setActive] = useState<string>("None");
   const [startDate, setStartDate] = useState<any>();
   const [endDate, setEndDate] = useState<any>();
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
-  const [cost, setCost] = useState<number>(0);
+  const [cost, setCost] = useState<string>(0);
   const findByName = (active: string) => {
     return rooms.find((room) => room.name === active);
   };
@@ -78,7 +74,8 @@ export function Home() {
 
     const cost = (roomPrice + addOnTotal) * daydiff;
     const totalCost = cost + cost * 0.18;
-    setCost(totalCost);
+    const costWithCurrency = totalCost.toString() + " " + currency;
+    setCost(costWithCurrency);
     console.log("Cost : ", totalCost);
     console.log("days stayed : ", daydiff);
     console.log("taken room : ", JSON.stringify(roomTaken, null, 2));
@@ -114,7 +111,7 @@ export function Home() {
             <DateField
               label="start date"
               value={startDate}
-              onChange={(newValue) => setStartDate(newValue!)}
+              onChange={(newValue) => setStartDate(newValue)}
               required
               className="date"
             />
@@ -122,7 +119,7 @@ export function Home() {
               label="end date"
               value={endDate}
               required
-              onChange={(newValue) => setEndDate(newValue!)}
+              onChange={(newValue) => setEndDate(newValue)}
               className="date"
             />
           </div>
