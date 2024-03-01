@@ -28,6 +28,7 @@ export const Container = styled.div<{ $active?: string }>`
     width: 20vw;
     font-weight: 500;
     min-width: 150px;
+    cursor: pointer;
   }
   /* .radioButton + .radioButton{
     margin-bottom: 10px;

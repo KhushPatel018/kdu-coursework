@@ -150,7 +150,7 @@ export function Home() {
           ))}
       </div>
       <div className="cost">Cost + 18% GST : {cost}</div>
-      <button className="submit" onClick={handleSubmit}>
+      <button className="submit" onClick={handleSubmit} style={active === 'None'  ?  {opacity : "0.5"} : {opacity : "1",cursor : "pointer"} }>
         Submit
       </button>
     </Container>
