@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    width: 100vw;
+    height: 10vh;
+    padding: 1em;
+    background-color: rgb(87, 188, 87);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    .title {
+        font-size: 32px;
+        width: 20%;
+    }
+    #search {
+        width: max(33%, 200px);
+        font-size: 1.3rem;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        padding: 0.5em;
+    }
+}
