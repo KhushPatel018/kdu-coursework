@@ -1,0 +1,156 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+*::after,
+*::before,
+* {
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-position: bottom;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.container .header {
+  margin: 0.5em;
+  height: 10%;
+  width: 90%;
+  text-align: center;
+  padding: 0.5em;
+  font-size: 3rem;
+  background: linear-gradient(to bottom right, #E6F7FF, #FFE6E6);
+  border: none;
+  border-radius: 25px;
+}
+.container .search-box {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 0.5rem;
+  height: 7vh;
+}
+.container .search-box #search-input {
+  width: 80%;
+  border: none;
+  border-radius: 25px;
+  font-size: 2rem;
+  padding-left: 1em;
+  outline: none;
+  background: linear-gradient(to bottom right, #E6F7FF, #FFE6E6);
+}
+.container .search-box #search {
+  background: linear-gradient(to bottom right, #E6F7FF, #FFE6E6);
+  width: 10%;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.container .recipe-container {
+  height: 70%;
+  width: 90%;
+  margin: 0 2em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: start;
+  gap: 10px;
+  row-gap: 25px;
+}
+.container .recipe-container .recipe-wrap {
+  height: 63%;
+  width: 32%;
+  position: relative;
+}
+.container .recipe-container .recipe-wrap .recipe {
+  background: linear-gradient(to bottom right, #E6F7FF, #FFE6E6);
+  height: 100%;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 6px;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  row-gap: 8px;
+}
+.container .recipe-container .recipe-wrap .recipe img {
+  height: 30%;
+  width: 80%;
+}
+.container .recipe-container .recipe-wrap .recipe .item-name {
+  height: 10%;
+  width: 80%;
+  border: 1px solid black;
+  border-radius: 6px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+}
+.container .recipe-container .recipe-wrap .recipe .ingerdients {
+  height: 15%;
+  width: 90%;
+  text-wrap: wrap;
+  border: 1px solid black;
+  border-radius: 6px;
+  font-size: 1rem;
+  padding: 0.4em;
+}
+.container .recipe-container .recipe-wrap .recipe .cuisine-diff {
+  height: 15%;
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 0.4em;
+}
+.container .recipe-container .recipe-wrap .recipe .cuisine-diff .cuisine {
+  width: 45%;
+  height: 100%;
+  border: 1px solid black;
+  border-radius: 6px;
+  font-weight: 400;
+}
+.container .recipe-container .recipe-wrap .recipe .cuisine-diff .diff {
+  width: 45%;
+  height: 100%;
+  border: 1px solid black;
+  border-radius: 6px;
+  font-weight: 400;
+}
+.container .recipe-container .recipe-wrap .recipe .time-cal {
+  height: 15%;
+  width: 75%;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-align: center;
+}
+.container .recipe-container .recipe-wrap .recipe .time-cal .time {
+  width: 45%;
+  height: 100%;
+  border: 1px solid black;
+  border-radius: 6px;
+}
+.container .recipe-container .recipe-wrap .recipe .time-cal .cal {
+  width: 45%;
+  height: 100%;
+  border: 1px solid black;
+  border-radius: 6px;
+}
+.container .recipe-container .recipe-wrap .rating {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  background-color: rgb(194, 225, 224);
+  height: 55px;
+  width: 55px;
+  text-align: center;
+  padding: 0.6em;
+  border-radius: 50%;
+}/*# sourceMappingURL=style.css.map */
