@@ -1,0 +1,116 @@
+import { CSSProperties } from "react";
+
+export const styles: { [key: string]: CSSProperties } = {
+  container: {
+    boxSizing: 'border-box',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundColor: '#E4EAF0',
+    minHeight: '100vh',
+    overflow: 'hidden',
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    backgroundColor: '#0c359e',
+    padding: '0.5em 1em',
+    gap: '4px',
+  },
+  searchWrapper: {
+    display: 'flex',
+    height: '5vh',
+    width: '40%',
+    justifyContent: 'start',
+    alignItems: 'center',
+    gap: '8px',
+  },
+  searchInput: {
+    height: '40%',
+    width: '50%',
+    padding: '0.3em 1em',
+    outline: 'none',
+    border: 'none',
+    borderRadius: '25px',
+    justifySelf: 'flex-start',
+  },
+  search: {
+    height: '55%',
+    width: '28px',
+    cursor: 'pointer',
+    border: 'none',
+    borderRadius: '50%',
+    justifySelf: 'flex-start',
+  },
+  wrapper: {
+    height: '100%',
+    width: '60%',
+    display: 'flex',
+    color: 'white',
+    fontSize: 'clamp(16px, 50% + 13px, 40px)',
+    fontWeight: 500,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  loading : {
+    display : 'flex',
+    alignItems: 'center',
+    justifyContent : 'center',
+    height : '35vh'
+  },
+  filters: {
+    display: 'flex',
+    height: '100%',
+    width: '55%',
+    alignItems: 'center',
+    justifyContent: 'end',
+    gap: 'max(4px,0.8em)',
+  },
+  filterLabel: {
+    color: '#f6f5f5',
+  },
+  select: {
+    padding: '0.3em',
+    border: 'none',
+    borderRadius: '6px',
+    outline: 'none',
+  },
+  sortBy: {
+    display: 'flex',
+    justifyContent: 'start',
+    alignItems: 'center',
+    height: '100%',
+    width: '40%',
+    gap: 'max(4px,0.8rem)',
+  },
+  title: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    padding: '0.3em .5em',
+    gap: '1em',
+    fontWeight: 700,
+    fontSize: 'max(2.5rem,40px)',
+  },
+  marketplace: {
+    color: '#0c359e',
+  },
+  products: {
+    display: 'grid',
+    gridTemplateColumns : 'repeat(auto-fit,minmax(320px,1fr))',
+    width: '95%',
+    margin : 'auto',
+    gap: '1em',
+  },
+  noItems: {
+    color: 'rgb(215, 79, 79)',
+    fontSize: '2rem',
+    textAlign: 'center',
+    width: '100%',
+  },
+};
+
+
