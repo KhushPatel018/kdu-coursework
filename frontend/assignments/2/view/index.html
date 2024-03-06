@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+    <div class="container"> 
+        <div class="heading">Login to <img src="./twiiter base line images/logo/twitter.png" alt="X"></div>
+        <input type="text" id ="username" placeholder="Username">
+        <input type="password" name="" id="password" placeholder="Password">
+        <div id="error">invalid credentials login failed.please enter the valid creds.</div>
+        <button id="login">Log in</button>
+    </div>
+    <script
+      src="https://cdn.socket.io/4.7.4/socket.io.min.js"
+      integrity="sha384-Gr6Lu2Ajx28mzwyVR8CFkULdCU7kMlZ9UthllibdOSo6qAiN+yXNHqtgdTvFXMT4"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./login.js"></script>
+</body>
+</html>
