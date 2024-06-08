@@ -1,0 +1,41 @@
+1. New State
+
+By default, a Thread will be in a new state,  in this state, code has not yet been run and the execution process is not yet initiated.
+
+2. Active State
+
+A Thread that is a new state by default gets transferred to Active state when it invokes the start() method, his Active state contains two sub-states namely:
+
+Runnable State: In This State, The Thread is ready to run at any given time and it’s the job of the Thread Scheduler to provide the thread time for the runnable state preserved threads. A program that has obtained Multithreading shares slices of time intervals which are shared between threads hence, these threads run for some short span of time and wait in the runnable state to get their schedules slice of a time interval.
+Running State: When The Thread Receives CPU allocated by Thread Scheduler, it transfers from the “Runnable” state to the “Running” state. and after the expiry of its given time slice session, it again moves back to the “Runnable” state and waits for its next time slice.
+3. Waiting/Blocked State
+
+If a Thread is inactive but on a temporary time, then either it is a waiting or blocked state, for example, if there are two threads, T1 and T2 where T1 needs to communicate to the camera and the other thread T2 already using a camera to scan then T1 waits until T2 Thread completes its work, at this state T1 is parked in waiting for the state, and in another scenario, the user called two Threads T2 and T3 with the same functionality and both had same time slice given by Thread Scheduler then both Threads T1, T2 is in a blocked state. When there are multiple threads parked in a Blocked/Waiting state Thread Scheduler clears Queue by rejecting unwanted Threads and allocating CPU on a priority basis.
+
+4. Timed Waiting State
+
+Sometimes the longer duration of waiting for threads causes starvation, if we take an example like there are two threads T1, T2 waiting for CPU and T1 is undergoing a Critical Coding operation and if it does not exist the CPU until its operation gets executed then T2 will be exposed to longer waiting with undetermined certainty, In order to avoid this starvation situation, we had Timed Waiting for the state to avoid that kind of scenario as in Timed Waiting, each thread has a time period for which sleep() method is invoked and after the time expires the Threads starts executing its task.
+
+5. Terminated State
+
+A thread will be in Terminated State, due to the below reasons:
+
+Termination is achieved by a Thread when it finishes its task Normally.
+Sometimes Threads may be terminated due to unusual events like segmentation faults, exceptions…etc. and such kind of Termination can be called Abnormal Termination.
+A terminated Thread means it is dead and no longer available.
+What is Main Thread?
+As we are familiar, we create Main Method in each and every Java Program, which acts as an entry point for the code to get executed by JVM, Similarly in this Multithreading Concept, Each Program has one Main Thread which was provided by default by JVM, hence whenever a program is being created in java, JVM provides the Main Thread for its Execution.
+
+How to Create Threads using Java Programming Language?
+We can create Threads in java using two ways, namely :
+
+Extending Thread Class
+Implementing a Runnable interface
+1. By Extending Thread Class
+
+We can run Threads in Java by using Thread Class, which provides constructors and methods for creating and performing operations on a Thread, which extends a Thread class that can implement Runnable Interface. We use the following constructors for creating the Thread:
+
+Thread
+Thread(Runnable r)
+Thread(String name)
+Thread(Runnable r, String name)
