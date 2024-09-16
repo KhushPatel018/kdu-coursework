@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.hobbies-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  border: 3px solid #f4a426;
+  background-color: #b2f2bb;
+}
+
+.heading {
+  color: #f08c03;
+  font-size: 1.8rem;
+  align-self: center;
+  background-color: #b2f2bb;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  padding: 1em;
+  font-size: 1.5rem;
+  color: #2f9e44;
+  background-color: #b2f2bb;
+}
+.items li {
+  background-color: #b2f2bb;
+}

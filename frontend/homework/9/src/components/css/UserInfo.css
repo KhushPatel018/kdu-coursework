@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.info-div {
+  padding: 2em;
+}
+.name {
+  font-size: 2rem;
+  margin-bottom: 0.3em;
+}
+
+.full-name {
+  font-size: 1rem;
+  margin-bottom: 0.3em;
+}
