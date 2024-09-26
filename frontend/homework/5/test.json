@@ -1,0 +1,11 @@
+{
+  "hostName": "hp-HP-EliteBook-840-G7-Notebook-PC",
+  "operatingSystem": "linux",
+  "Architecture": "x64",
+  "OSRelease": "6.5.0-15-generic",
+  "uptime": 52106.77,
+  "numberOfCPUCores": 8,
+  "totalMemory": 16524701696,
+  "freeMemory": 8161476608,
+  "CurrentWorkingDirectory": "/home/hp/code/FrontEnd/NodeJs/handsOn"
+}
