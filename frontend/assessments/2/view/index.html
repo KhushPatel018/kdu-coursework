@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stockes</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">KDU Stock Market Dashboard</div>
+      <div class="wrapper">
+        <div class="stock-container">
+          <div class="display">
+            <div class="company">
+              <img src="" alt="" id="logo" />
+              <div class="name">Zomato</div>
+            </div>
+            <div class="price">
+              <div class="lable">Price</div>
+              <div class="value">142.32</div>
+              <div class="hike">3.00%</div>
+            </div>
+            <input type="number" id="quntity" placeholder="enter QTY" />
+            <button id="buy" onclick="handleClick('buy')">BUY</button>
+            <button id="sell" onclick="handleClick('sell')">SELL</button>
+          </div>
+          <div class="chart">
+            <div class="background"></div>
+            <div class="bar-container">
+              <div class="green-bar"></div>
+              <div class="red-bar"></div>
+            </div>
+          </div>
+        </div>
+        <div class="history">
+          <div class="heading">History</div>
+          <div class="transaction-box"></div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.socket.io/4.7.4/socket.io.min.js"
+      integrity="sha384-Gr6Lu2Ajx28mzwyVR8CFkULdCU7kMlZ9UthllibdOSo6qAiN+yXNHqtgdTvFXMT4"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const socket = io("http://localhost:5000");
+
+      let initialPrice = 100.0;
+
+      // emit every 5 second
+      setInterval(() => {
+        socket.emit("price", initialPrice);
+      }, 5000);
+      socket.on("priceResponse", (response) => {
+          initialPrice = response.price;
+          outputTransaction(response);
+          updatePrice(response);
+      });
+      // put the message to DOM
+      function outputTransaction(message) {
+        console.log(message);
+        // bar lagaya
+        const barContainer = document.querySelector(".bar-container");
+        if (barContainer.childNodes.length === 20) {
+          barContainer.childNodes.forEach((child) => child.remove());
+        }
+        if (message.hike > 0) {
+          const greenBar = document.createElement("div");
+          greenBar.classList.add("green-bar");
+          greenBar.style.height = `${parseFloat(message.price)}px`;
+          barContainer.appendChild(greenBar);
+        } else {
+          const redBar = document.createElement("div");
+          redBar.classList.add("red-bar");
+          redBar.style.height = `${parseFloat(message.price)}px`;
+          barContainer.appendChild(redBar);
+        }
+      }
+
+      function updatePrice(response) {
+        const value = document.querySelector(".value");
+        value.innerText = `${response.price}`;
+        if(response.hike > 0)
+        {
+            value.style.color = '#2f9e44'
+        }else{
+            value.style.color = '#e03131'
+        }
+        const hike = document.querySelector(".hike");
+        const hikeValue = response.hike.toString().substring(0, 4);
+        hike.innerText = `${hikeValue}%`;
+      }
+
+      const handleClick = (name) => {
+        const transactionBox = document.querySelector(".transaction-box");
+        const inputBox = document.querySelector("#quntity");
+        console.log("clicked");
+        let msg = inputBox.value;
+        const value = document.querySelector(".value");
+        console.log(msg);
+        msg = msg.trim();
+        if (!msg) {
+          return false;
+        }
+        const tran = document.createElement('div');
+        tran.classList.add('transection');
+        tran.innerText = `${msg} Stockes at price : ${value.innerText} ${name}`
+        transactionBox.appendChild(tran);
+        inputBox.value = "";
+        transactionBox.scrollTop = transactionBox.scrollHeight;
+      };
+
+    </script>
+  </body>
+</html>
