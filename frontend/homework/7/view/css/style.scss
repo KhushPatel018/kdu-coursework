@@ -1,0 +1,103 @@
+*::after,
+*::before,
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.container {
+    background-image: url("../HD-wallpaper-whatsapp-background-cool-dark-green-new-theme-whatsapp.jpg");
+    background-size: contain;
+    height: 100vh;
+    width: 100vw;
+    .heading {
+        background-color: #dfe1e6;
+        padding: 1em 0;
+        padding-left: 2em;
+        font-size: 2rem;
+        color: #5c81a2;
+        height: 10%;
+        border-radius: 25px;
+    }
+    .message-box {
+
+        padding: 1em;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        overflow: scroll;
+        overflow-x: hidden;
+        .message {
+            background-color: #3e3e3f;
+            display: flex;
+            width: 50%;
+            border: none;
+            border-radius: 6px;
+            padding: 1em;
+            padding-top: 0.7em;
+            align-items:center;
+            .profile {
+                width: 44px;
+                height: 44px;
+                border: noun;
+                border-radius: 50%;
+            }
+            .message-body {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                width: 90%;
+                color: rgb(231, 226, 226);
+                margin-left: 15px;
+                .message-header {
+                    font-size: 1.3rem;
+                    font-weight: 600;
+                    .time {
+                        color: #abb1ad;
+                        font-size: 1rem;
+                        margin-left: 5px;
+                    }
+                }
+                .message-content {
+                    font-size: 1.3rem;
+                }
+            }
+        }
+    }
+    .message-input {
+        display: flex;
+        width: 100%;
+        height: 8%;
+        margin-bottom: 15px;
+        justify-content: flex-start;
+        gap: 5px;
+        #message-text {
+            width: 85%;
+            border: none;
+            border-radius: 10px;
+            background-color: #e3e9e5;
+            margin-left: 1em;
+            font-size: 1.3rem;
+            padding-left: 5em;
+            outline: none;
+        }
+        #message-text::placeholder {
+            font-size: 1.5rem;
+            color: #808381;
+        }
+        #sent {
+            width: 5%;
+            border: none;
+            padding: 0.1em;
+            border-radius: 50%;
+            cursor: pointer;
+            img {
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+}

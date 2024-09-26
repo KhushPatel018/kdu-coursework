@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat app</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="heading">KDU Chat App</div>
+      <div class="message-box">
+      </div>
+      <div class="message-input">
+        <input
+          type="text"
+          name="message"
+          placeholder="type a message"
+          id="message-text"
+        />
+        <button id="sent" onclick="handleClick()">
+          <img src="./unnamed.png" alt="send" />
+        </button>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+    <script src="../client.js"></script>
+  </body>
+</html>
